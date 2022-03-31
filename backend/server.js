@@ -9,6 +9,8 @@ import https from "https";
 import connectDB from "./config/db.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
+import userRoutes from "./routes/userRoutes.js";
+
 let credentials = {};
 
 //Certificate
