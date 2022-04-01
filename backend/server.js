@@ -10,6 +10,7 @@ import connectDB from "./config/db.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 import userRoutes from "./routes/userRoutes.js";
+import productRoutes from "./routes/productRoutes.js";
 
 let credentials = {};
 
@@ -56,6 +57,9 @@ const __dirname = path.resolve();
 const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
+
+app.use("/api/products", productRoutes);
+app.use("/api/users", userRoutes);
 
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 

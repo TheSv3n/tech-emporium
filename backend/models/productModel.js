@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
 
-const specificationSchema = mongoose.Schema({});
+const specificationSchema = mongoose.Schema({
+  dimensions: {
+    type: String,
+    required: false,
+  },
+});
 
 const reviewSchema = mongoose.Schema(
   {
