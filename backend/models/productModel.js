@@ -1,7 +1,11 @@
 import mongoose from "mongoose";
 
 const specificationSchema = mongoose.Schema({
-  dimensions: {
+  specificationKey: {
+    type: String,
+    required: false,
+  },
+  specificationValue: {
     type: String,
     required: false,
   },
@@ -54,6 +58,10 @@ const productSchema = mongoose.Schema(
     category: {
       type: String,
       required: true,
+    },
+    subCategory: {
+      type: String,
+      required: false,
     },
     description: {
       type: String,
