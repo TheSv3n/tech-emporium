@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../actions/productActions";
+import ProductCard from "../components/ProductCard";
+import "../css/HomeScreen.css";
 
 const HomeScreen = () => {
   const params = useParams();
@@ -18,9 +20,11 @@ const HomeScreen = () => {
 
   return (
     <>
-      {products.map((product) => (
-        <div key={product._id}>{product.name}</div>
-      ))}
+      <div className="grid-container">
+        {products.map((product) => (
+          <ProductCard key={product._id} product={product} />
+        ))}
+      </div>
     </>
   );
 };
