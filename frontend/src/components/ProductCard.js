@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import RatingWidget from "./RatingWidget";
 
 const ProductCard = ({ product }) => {
   return (
@@ -14,7 +15,17 @@ const ProductCard = ({ product }) => {
           />
         </Link>
       </div>
-      <div className="product-card-title">{product.name}</div>
+      <Link to={`/product/${product._id}`} className="product-card-title">
+        <div className="product-card-title">{product.name}</div>
+      </Link>
+
+      <div className="product-card-lower-container">
+        <div className="product-card-rating-container">
+          <RatingWidget value={product.rating} text={""} color={"orange"} />
+          <div>({product.reviews.length} reviews)</div>
+        </div>
+        <div className="product-card-price">£{product.price}</div>
+      </div>
     </div>
   );
 };
