@@ -20,7 +20,7 @@ const HomeScreen = () => {
 
   return (
     <>
-      <div className="grid-container">
+      <div className="top-product-grid-container">
         {products.map((product) => (
           <ProductCard key={product._id} product={product} />
         ))}
