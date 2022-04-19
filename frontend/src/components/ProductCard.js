@@ -8,7 +8,7 @@ const ProductCard = ({ product }) => {
       <div className="image-container">
         <Link to={`/product/${product._id}`}>
           <img
-            className="rr-tile-image"
+            className="product-card-image"
             src={product.image}
             alt={product.name}
             title=""
