@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { listProductDetails } from "../actions/productActions";
@@ -10,12 +10,18 @@ const ProductScreen = () => {
   const dispatch = useDispatch();
   const productId = params.id;
 
+  const [productSpecs, setProductSpecs] = useState([]);
+
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
   useEffect(() => {
-    dispatch(listProductDetails(productId));
-  }, [dispatch, productId]);
+    if (!product || product._id !== productId) {
+      dispatch(listProductDetails(productId));
+    } else {
+      setProductSpecs(product.specifications);
+    }
+  }, [dispatch, productId, product]);
   return (
     <>
       {loading ? (
@@ -25,7 +31,7 @@ const ProductScreen = () => {
       ) : (
         <div className="product-page-grid-container">
           <div className="product-title">{product.name}</div>
-          <div className="cart-column">test</div>
+
           <div className="product-image-container">
             <img
               className="product-image"
@@ -34,8 +40,23 @@ const ProductScreen = () => {
               title=""
             />
           </div>
+          <div className="cart-column">
+            <div className="product-price">Price: £{product.price}</div>
+          </div>
           <div className="specification-container">
             <div className="specification-title">Specifications</div>
+            {productSpecs.length === 0 ? (
+              <div>No Specs Available</div>
+            ) : (
+              productSpecs.map((specification) => {
+                return (
+                  <div key={specification._id}>
+                    {specification.specificationKey} :{" "}
+                    {specification.specificationValue}
+                  </div>
+                );
+              })
+            )}
           </div>
         </div>
       )}
