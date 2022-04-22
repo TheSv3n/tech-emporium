@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { listProductDetails } from "../actions/productActions";
 import Loader from "../components/Loader";
 import "../css/ProductScreen.css";
+import PurchaseColumn from "../components/PurchaseColumn";
 
 const ProductScreen = () => {
   const params = useParams();
@@ -40,9 +41,7 @@ const ProductScreen = () => {
               title=""
             />
           </div>
-          <div className="cart-column">
-            <div className="product-price">Price: £{product.price}</div>
-          </div>
+          <PurchaseColumn product={product} />
           <div className="specification-container">
             <div className="specification-title">Specifications</div>
             {productSpecs.length === 0 ? (
