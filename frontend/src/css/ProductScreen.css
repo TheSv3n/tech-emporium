@@ -58,3 +58,8 @@
     line-height: 20px;
     border: none;
 }
+
+.add-to-cart-button:hover {
+    cursor: pointer;
+    background-color: var(--cardinalShadow);
+}
