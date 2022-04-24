@@ -5,6 +5,7 @@ import { listProductDetails } from "../actions/productActions";
 import Loader from "../components/Loader";
 import "../css/ProductScreen.css";
 import PurchaseColumn from "../components/PurchaseColumn";
+import AddToCartModal from "../components/AddToCartModal";
 
 const ProductScreen = () => {
   const params = useParams();
@@ -30,34 +31,37 @@ const ProductScreen = () => {
       ) : error ? (
         <div>{error}</div>
       ) : (
-        <div className="product-page-grid-container">
-          <div className="product-title">{product.name}</div>
+        <>
+          <AddToCartModal />
+          <div className="product-page-grid-container">
+            <div className="product-title">{product.name}</div>
 
-          <div className="product-image-container">
-            <img
-              className="product-image"
-              src={product.image}
-              alt={product.name}
-              title=""
-            />
+            <div className="product-image-container">
+              <img
+                className="product-image"
+                src={product.image}
+                alt={product.name}
+                title=""
+              />
+            </div>
+            <PurchaseColumn product={product} />
+            <div className="specification-container">
+              <div className="specification-title">Specifications</div>
+              {productSpecs.length === 0 ? (
+                <div>No Specs Available</div>
+              ) : (
+                productSpecs.map((specification) => {
+                  return (
+                    <div key={specification._id}>
+                      {specification.specificationKey} :{" "}
+                      {specification.specificationValue}
+                    </div>
+                  );
+                })
+              )}
+            </div>
           </div>
-          <PurchaseColumn product={product} />
-          <div className="specification-container">
-            <div className="specification-title">Specifications</div>
-            {productSpecs.length === 0 ? (
-              <div>No Specs Available</div>
-            ) : (
-              productSpecs.map((specification) => {
-                return (
-                  <div key={specification._id}>
-                    {specification.specificationKey} :{" "}
-                    {specification.specificationValue}
-                  </div>
-                );
-              })
-            )}
-          </div>
-        </div>
+        </>
       )}
     </>
   );
