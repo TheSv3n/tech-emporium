@@ -16,3 +16,20 @@
     visibility: visible;
     z-index: 10;
 }
+
+.modal-container {
+    background-color: var(--eggShell);
+    padding: 12px 24px;
+    border-radius: 24px;
+    display: grid;
+    gap: 10px;    
+}
+
+.add-to-cart-modal {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.add-to-cart-modal-title {
+    text-align: center;
+    grid-column: 1/4;
+}

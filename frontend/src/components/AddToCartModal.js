@@ -1,18 +1,27 @@
 import React from "react";
 import "../css/modal.css";
 
-const AddToCartModal = ({ showModal }) => {
+const AddToCartModal = ({
+  showModal,
+  updateModal,
+  handleAddToCart,
+  handleGoToCheckout,
+}) => {
   return (
     <div
       className={`${showModal ? "modal-overlay show-modal" : "modal-overlay"}`}
     >
-      <div className="modal-container new-review-container bg-secondary">
-        <div className="">
+      <div className="modal-container add-to-cart-modal">
+        <div className="add-to-cart-modal-title">
           Do you want to checkout now or continue shopping?
         </div>
-        <button className="add-to-cart-button">Checkout</button>
-        <button className="add-to-cart-button">Continue</button>
-        <button className="add-to-cart-button">Cancel</button>
+        <button className="button" onClick={handleGoToCheckout}>
+          Checkout
+        </button>
+        <button className="button">Continue</button>
+        <button className="button" onClick={updateModal}>
+          Cancel
+        </button>
       </div>
     </div>
   );

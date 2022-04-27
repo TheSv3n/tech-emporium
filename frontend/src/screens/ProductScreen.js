@@ -1,18 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { listProductDetails } from "../actions/productActions";
 import Loader from "../components/Loader";
 import "../css/ProductScreen.css";
 import PurchaseColumn from "../components/PurchaseColumn";
 import AddToCartModal from "../components/AddToCartModal";
+import { addToCart } from "../actions/cartActions";
 
 const ProductScreen = () => {
   const params = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const productId = params.id;
 
   const [productSpecs, setProductSpecs] = useState([]);
+  const [quantity, setQuantity] = useState(0);
+  const [showAddToCartModal, setShowAddToCartModal] = useState(false);
+
+  const updateShowAddToCartModal = () => {
+    setShowAddToCartModal(!showAddToCartModal);
+  };
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(productId, quantity));
+  };
+
+  const handleGoToCheckout = () => {
+    navigate(`/cart/${productId}?qty=${quantity}`);
+  };
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
@@ -32,7 +48,12 @@ const ProductScreen = () => {
         <div>{error}</div>
       ) : (
         <>
-          <AddToCartModal />
+          <AddToCartModal
+            showModal={showAddToCartModal}
+            updateModal={updateShowAddToCartModal}
+            handleAddToCart={handleAddToCart}
+            handleGoToCheckout={handleGoToCheckout}
+          />
           <div className="product-page-grid-container">
             <div className="product-title">{product.name}</div>
 
@@ -44,7 +65,10 @@ const ProductScreen = () => {
                 title=""
               />
             </div>
-            <PurchaseColumn product={product} />
+            <PurchaseColumn
+              product={product}
+              updateModal={updateShowAddToCartModal}
+            />
             <div className="specification-container">
               <div className="specification-title">Specifications</div>
               {productSpecs.length === 0 ? (
