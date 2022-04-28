@@ -18,7 +18,9 @@ const AddToCartModal = ({
         <button className="button" onClick={handleGoToCheckout}>
           Checkout
         </button>
-        <button className="button">Continue</button>
+        <button className="button" onClick={handleAddToCart}>
+          Continue
+        </button>
         <button className="button" onClick={updateModal}>
           Cancel
         </button>

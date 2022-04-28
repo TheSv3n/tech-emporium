@@ -15,7 +15,7 @@ const ProductScreen = () => {
   const productId = params.id;
 
   const [productSpecs, setProductSpecs] = useState([]);
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const [showAddToCartModal, setShowAddToCartModal] = useState(false);
 
   const updateShowAddToCartModal = () => {
@@ -24,6 +24,7 @@ const ProductScreen = () => {
 
   const handleAddToCart = () => {
     dispatch(addToCart(productId, quantity));
+    updateShowAddToCartModal();
   };
 
   const handleGoToCheckout = () => {
