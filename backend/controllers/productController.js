@@ -52,6 +52,7 @@ const createProduct = asyncHandler(async (req, res) => {
     countInStock: 0,
     numReviews: 0,
     description: "Sample description",
+    purchaseLimit: 0,
   });
 
   const createdProduct = await product.save();
@@ -71,6 +72,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     category,
     countInStock,
     specifications,
+    purchaseLimit,
   } = req.body;
 
   const product = await Product.findById(req.params.id);
@@ -84,6 +86,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     product.category = category;
     product.countInStock = countInStock;
     product.specifications = specifications;
+    product.purchaseLimit = purchaseLimit;
 
     const updatedProduct = await product.save();
     res.status(201).json(updatedProduct);

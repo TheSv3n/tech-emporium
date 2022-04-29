@@ -5,8 +5,8 @@ import { listProductDetails } from "../actions/productActions";
 import Loader from "../components/Loader";
 import "../css/ProductScreen.css";
 import PurchaseColumn from "../components/PurchaseColumn";
-import AddToCartModal from "../components/AddToCartModal";
-import { addToCart } from "../actions/cartActions";
+import AddToBasketModal from "../components/AddToBasketModal";
+import { addToBasket } from "../actions/basketActions";
 
 const ProductScreen = () => {
   const params = useParams();
@@ -16,19 +16,19 @@ const ProductScreen = () => {
 
   const [productSpecs, setProductSpecs] = useState([]);
   const [quantity, setQuantity] = useState(1);
-  const [showAddToCartModal, setShowAddToCartModal] = useState(false);
+  const [showAddToBasketModal, setShowAddToBasketModal] = useState(false);
 
-  const updateShowAddToCartModal = () => {
-    setShowAddToCartModal(!showAddToCartModal);
+  const updateShowAddToBasketModal = () => {
+    setShowAddToBasketModal(!showAddToBasketModal);
   };
 
-  const handleAddToCart = () => {
-    dispatch(addToCart(productId, quantity));
-    updateShowAddToCartModal();
+  const handleAddToBasket = () => {
+    dispatch(addToBasket(productId, quantity));
+    updateShowAddToBasketModal();
   };
 
   const handleGoToCheckout = () => {
-    navigate(`/cart/${productId}?qty=${quantity}`);
+    navigate(`/basket/${productId}?qty=${quantity}`);
   };
 
   const productDetails = useSelector((state) => state.productDetails);
@@ -49,10 +49,10 @@ const ProductScreen = () => {
         <div>{error}</div>
       ) : (
         <>
-          <AddToCartModal
-            showModal={showAddToCartModal}
-            updateModal={updateShowAddToCartModal}
-            handleAddToCart={handleAddToCart}
+          <AddToBasketModal
+            showModal={showAddToBasketModal}
+            updateModal={updateShowAddToBasketModal}
+            handleAddToBasket={handleAddToBasket}
             handleGoToCheckout={handleGoToCheckout}
           />
           <div className="product-page-grid-container">
@@ -68,7 +68,8 @@ const ProductScreen = () => {
             </div>
             <PurchaseColumn
               product={product}
-              updateModal={updateShowAddToCartModal}
+              updateModal={updateShowAddToBasketModal}
+              setQuantity={setQuantity}
             />
             <div className="specification-container">
               <div className="specification-title">Specifications</div>

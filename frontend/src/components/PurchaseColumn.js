@@ -4,9 +4,9 @@ const PurchaseColumn = ({ product, updateModal }) => {
   return (
     <div className="purchase-column purchase-column-grid-container">
       <div className="product-price">Price: £{product.price}</div>
-      <button className="button add-to-cart-button" onClick={updateModal}>
+      <button className="button add-to-basket-button" onClick={updateModal}>
         <i class="bi bi-basket2"></i>
-        <span> Add to cart</span>
+        <span> Add to basket</span>
       </button>
     </div>
   );

@@ -6,8 +6,8 @@ const Header = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-  const cart = useSelector((state) => state.cart);
-  const { cartItems } = cart;
+  const basket = useSelector((state) => state.basket);
+  const { basketItems } = basket;
 
   return (
     <header>
@@ -16,10 +16,10 @@ const Header = () => {
           <div>The Tech Emporium</div>
         </Link>
         <div>
-          <Link to="/cart" className="title-text">
+          <Link to="/basket" className="title-text">
             <span>
-              <i className="bi bi-cart3" /> Cart{" "}
-              {cartItems.length > 0 ? `(${cartItems.length} items)` : ""}
+              <i className="bi bi-basket2" /> Basket{" "}
+              {basketItems.length > 0 ? `(${basketItems.length} items)` : ""}
             </span>
           </Link>
           {userInfo ? (

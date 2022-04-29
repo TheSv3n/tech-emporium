@@ -89,6 +89,11 @@ const productSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
+    purchaseLimit: {
+      type: Number,
+      required: false,
+      default: 0,
+    },
   },
   {
     timestamps: true,

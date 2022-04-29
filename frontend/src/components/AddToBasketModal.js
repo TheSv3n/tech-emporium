@@ -1,24 +1,24 @@
 import React from "react";
 import "../css/modal.css";
 
-const AddToCartModal = ({
+const AddToBasketModal = ({
   showModal,
   updateModal,
-  handleAddToCart,
+  handleAddToBasket,
   handleGoToCheckout,
 }) => {
   return (
     <div
       className={`${showModal ? "modal-overlay show-modal" : "modal-overlay"}`}
     >
-      <div className="modal-container add-to-cart-modal">
-        <div className="add-to-cart-modal-title">
+      <div className="modal-container add-to-basket-modal">
+        <div className="add-to-basket-modal-title">
           Do you want to checkout now or continue shopping?
         </div>
         <button className="button" onClick={handleGoToCheckout}>
           Checkout
         </button>
-        <button className="button" onClick={handleAddToCart}>
+        <button className="button" onClick={handleAddToBasket}>
           Continue
         </button>
         <button className="button" onClick={updateModal}>
@@ -29,4 +29,4 @@ const AddToCartModal = ({
   );
 };
 
-export default AddToCartModal;
+export default AddToBasketModal;

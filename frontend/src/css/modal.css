@@ -25,11 +25,11 @@
     gap: 10px;    
 }
 
-.add-to-cart-modal {
+.add-to-basket-modal {
     grid-template-columns: repeat(3, 1fr);
 }
 
-.add-to-cart-modal-title {
+.add-to-basket-modal-title {
     text-align: center;
     grid-column: 1/4;
 }

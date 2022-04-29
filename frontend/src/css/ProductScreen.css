@@ -27,6 +27,12 @@
     height: 500px;    
 }
 
+.product-price {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 400;
+}
+
 .purchase-column {
     grid-row: 1/3;
     border-radius: 10px;
@@ -47,6 +53,6 @@
     grid-template-rows: repeat(3, 1fr);    
 }
 
-.add-to-cart-button {
+.add-to-basket-button {
     min-width: 169px;    
 }

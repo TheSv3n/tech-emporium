@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
-import CartScreen from "./screens/CartScreen";
+import BasketScreen from "./screens/BasketScreen";
 
 function App() {
   return (
@@ -13,8 +13,8 @@ function App() {
         <Header />
         <main>
           <Routes>
-            <Route path="/cart/" element={<CartScreen />} />
-            <Route path="/cart/:id" element={<CartScreen />} />
+            <Route path="/basket/" element={<BasketScreen />} />
+            <Route path="/basket/:id" element={<BasketScreen />} />
             <Route path="/product/:id" element={<ProductScreen />} />
             <Route path="/" element={<HomeScreen />} />
           </Routes>
