@@ -5,7 +5,7 @@ const PurchaseColumn = ({ product, updateModal }) => {
     <div className="purchase-column purchase-column-grid-container">
       <div className="product-price">Price: £{product.price}</div>
       <button className="button add-to-basket-button" onClick={updateModal}>
-        <i class="bi bi-basket2"></i>
+        <i className="bi bi-basket2"></i>
         <span> Add to basket</span>
       </button>
     </div>

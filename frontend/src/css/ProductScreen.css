@@ -1,14 +1,5 @@
-.product-page-grid-container {
-    max-width: 1260px;
-    margin: 10px auto;
-    display: grid;
-    column-gap: 10px;
-    row-gap: 10px;    
-    grid-template-columns: repeat(3, 1fr);
-    background-color: #fff;
-    border-radius: 10px;
-    border: 1px solid #cdd8df;
-    padding: 16px 8px 16px;
+.product-page-grid-container {    
+    grid-template-columns: repeat(3, 1fr);    
 }
 
 .product-title {

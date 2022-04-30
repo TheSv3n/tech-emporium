@@ -1,0 +1,8 @@
+.basket-page-grid-container {    
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.basket-title {
+    font-size: 24px;
+    grid-column: 1/4;    
+}

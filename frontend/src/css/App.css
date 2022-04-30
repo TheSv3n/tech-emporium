@@ -52,3 +52,15 @@ body {
     cursor: pointer;
     background-color: var(--cardinalShadow);
 }
+
+.main-grid-container {
+    max-width: 1260px;
+    margin: 10px;
+    display: grid;
+    column-gap: 10px;
+    row-gap: 10px;    
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1px solid #cdd8df;
+    padding: 16px 8px 16px;
+}

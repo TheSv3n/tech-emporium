@@ -31,7 +31,7 @@ const Header = () => {
           ) : (
             <Link to="/login" className="title-text">
               <span className="menu-item">
-                <i class="bi bi-box-arrow-in-right" /> Login
+                <i className="bi bi-box-arrow-in-right" /> Login
               </span>
             </Link>
           )}
