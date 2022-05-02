@@ -55,7 +55,7 @@ const ProductScreen = () => {
             handleAddToBasket={handleAddToBasket}
             handleGoToCheckout={handleGoToCheckout}
           />
-          <div className="main-grid-container product-page-grid-container">
+          <div className="main-grid-container product-page-grid-container main-border">
             <div className="product-title">{product.name}</div>
 
             <div className="product-image-container">

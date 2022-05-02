@@ -4,7 +4,7 @@ import RatingWidget from "./RatingWidget";
 
 const ProductCard = ({ product }) => {
   return (
-    <div className="product-card-container">
+    <div className="product-card-container main-border">
       <div className="image-container">
         <Link to={`/product/${product._id}`}>
           <img

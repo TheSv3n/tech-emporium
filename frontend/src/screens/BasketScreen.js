@@ -24,7 +24,7 @@ const BasketScreen = () => {
   }, [dispatch, productId, qty]);
 
   return (
-    <div className="main-grid-container basket-page-grid-container">
+    <div className="main-grid-container basket-page-grid-container main-border">
       <div className="basket-title">
         Your Basket ({basketItems.length} items)
       </div>
@@ -37,6 +37,7 @@ const BasketScreen = () => {
           })
         )}
       </div>
+      <div className="checkout-column"></div>
     </div>
   );
 };

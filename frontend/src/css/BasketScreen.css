@@ -1,8 +1,53 @@
 .basket-page-grid-container {    
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
 }
 
 .basket-title {
     font-size: 24px;
     grid-column: 1/4;    
+}
+
+.basket-items-container {    
+    grid-column: 1/4;
+}
+
+.basket-list-item-container {    
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.basket-list-item-image-container{
+    grid-row: 1/4;
+}
+
+.basket-list-item-image {
+    max-width: 100%;
+    height: 131px;
+}
+
+.basket-list-item-title {
+    grid-column: 2/5;
+    text-decoration: none;
+    color: black;
+    font-size: 20px;    
+}
+
+.basket-list-item-price {
+    grid-column: 2/3;
+}
+
+.basket-list-item-total {
+    grid-column: 5/6;
+    grid-row: 1/4;
+    background-color: var(--eggShell);
+    border-radius: 0px 10px 10px 0px;
+}
+
+.checkout-column {
+    border-radius: 10px;
+    border: 1px solid #cdd8df;
+    padding: 8px;
+    min-height: 200px;
 }

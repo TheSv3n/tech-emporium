@@ -9,9 +9,7 @@
     text-align: center;
 }
 
-.product-card-container {
-    border-radius: 10px;
-    border: 1px solid #cdd8df;
+.product-card-container {    
     padding: 24px 8px 16px;
     height: 392px;
     background-color: #fff;
