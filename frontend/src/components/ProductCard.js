@@ -24,7 +24,7 @@ const ProductCard = ({ product }) => {
           <RatingWidget value={product.rating} text={""} color={"orange"} />
           <div>({product.reviews.length} reviews)</div>
         </div>
-        <div className="product-card-price">£{product.price}</div>
+        <div className="product-card-price">£{product.price.toFixed(2)}</div>
       </div>
     </div>
   );
