@@ -17,6 +17,10 @@ const BasketScreen = () => {
   const basket = useSelector((state) => state.basket);
   const { basketItems } = basket;
 
+  const handleChangeQuantity = (product, updatedQuantity) => {
+    dispatch(addToBasket(product, updatedQuantity));
+  };
+
   useEffect(() => {
     if (productId) {
       dispatch(addToBasket(productId, qty));
@@ -33,11 +37,17 @@ const BasketScreen = () => {
           <div>No Items</div>
         ) : (
           basketItems.map((item) => {
-            return <BasketListItem key={item.product} item={item} />;
+            return (
+              <BasketListItem
+                key={item.product}
+                item={item}
+                handleChangeQuantity={handleChangeQuantity}
+              />
+            );
           })
         )}
       </div>
-      <div className="checkout-column"></div>
+      <div className="checkout-column main-border"></div>
     </div>
   );
 };

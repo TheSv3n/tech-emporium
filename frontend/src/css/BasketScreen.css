@@ -43,11 +43,10 @@
     grid-row: 1/4;
     background-color: var(--eggShell);
     border-radius: 0px 10px 10px 0px;
+    text-align: center;    
 }
 
-.checkout-column {
-    border-radius: 10px;
-    border: 1px solid #cdd8df;
+.checkout-column {    
     padding: 8px;
     min-height: 200px;
 }
