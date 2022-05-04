@@ -39,7 +39,9 @@ const BasketScreen = () => {
     setShowConfirmRemoveModal(false);
   };
 
-  const handleCheckout = () => {};
+  const handleCheckout = () => {
+    navigate("/login?redirect=delivery");
+  };
 
   useEffect(() => {
     if (productId) {
