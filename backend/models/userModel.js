@@ -16,10 +16,6 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    dateOfBirth: {
-      type: Date,
-      required: true,
-    },
     isAdmin: {
       type: Boolean,
       required: true,

@@ -1,25 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../actions/userActions";
 import Loader from "../components/Loader";
-import "../css/LoginScreen.css";
+import { register } from "../actions/userActions";
 
-const LoginScreen = () => {
+const RegisterScreen = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
 
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [message, setMessage] = useState(null);
 
-  const dispatch = useDispatch();
+  const userRegister = useSelector((state) => state.userRegister);
+  const { loading, error, userInfo } = userRegister;
 
   const redirect = location.search
     ? location.search.split("redirect=")[1]
     : null;
-
-  const userLogin = useSelector((state) => state.userLogin);
-  const { loading, error, userInfo } = userLogin;
 
   useEffect(() => {
     if (userInfo) {
@@ -29,11 +30,16 @@ const LoginScreen = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(login(email, password));
+    if (password !== confirmPassword) {
+      setMessage("Passwords do not match");
+    } else {
+      setMessage(null);
+      dispatch(register(name, email, password));
+    }
   };
 
-  const handleRegister = () => {
-    navigate(redirect ? `/register?redirect=${redirect}` : `/register`);
+  const handleLogin = () => {
+    navigate(redirect ? `/login?redirect=${redirect}` : `/login`);
   };
 
   return (
@@ -41,7 +47,17 @@ const LoginScreen = () => {
       onSubmit={submitHandler}
       className="main-grid-container login-page-grid-container main-border"
     >
-      <h2 className="login-title">Login</h2>
+      <h2 className="login-title">Register</h2>
+
+      <input
+        type="text"
+        placeholder="Enter Name"
+        name="name"
+        className="login-field"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        required
+      />
 
       <input
         type="text"
@@ -63,17 +79,28 @@ const LoginScreen = () => {
         required
       />
 
-      <button type="submit" className="button">
-        Login
-      </button>
+      <input
+        type="password"
+        placeholder="Confirm Password"
+        name="password"
+        className="login-field"
+        value={confirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
+        required
+      />
 
-      <button className="button" onClick={handleRegister}>
+      <button type="submit" className="button">
         Register
       </button>
+
+      <button type="submit" className="button" onClick={handleLogin}>
+        Go to Login Page
+      </button>
+      {message && <div>{message}</div>}
       {error && <div>{error}</div>}
       {loading && <Loader />}
     </form>
   );
 };
 
-export default LoginScreen;
+export default RegisterScreen;
