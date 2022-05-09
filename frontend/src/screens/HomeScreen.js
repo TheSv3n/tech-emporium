@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../actions/productActions";
 import ProductCard from "../components/ProductCard";
@@ -21,9 +21,13 @@ const HomeScreen = () => {
   return (
     <>
       <div className="top-product-grid-container">
-        {products.map((product) => (
-          <ProductCard key={product._id} product={product} />
-        ))}
+        {loading ? (
+          <div className="loader"></div>
+        ) : (
+          products.map((product) => (
+            <ProductCard key={product._id} product={product} />
+          ))
+        )}
       </div>
     </>
   );

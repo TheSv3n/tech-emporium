@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { listProductDetails } from "../actions/productActions";
-import Loader from "../components/Loader";
 import "../css/ProductScreen.css";
 import PurchaseColumn from "../components/PurchaseColumn";
 import AddToBasketModal from "../components/AddToBasketModal";
@@ -44,7 +43,7 @@ const ProductScreen = () => {
   return (
     <>
       {loading ? (
-        <Loader />
+        <div className="loader"></div>
       ) : error ? (
         <div>{error}</div>
       ) : (

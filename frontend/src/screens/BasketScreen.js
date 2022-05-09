@@ -5,6 +5,7 @@ import { addToBasket, removeFromBasket } from "../actions/basketActions";
 import "../css/BasketScreen.css";
 import BasketListItem from "../components/BasketListItem";
 import ConfirmRemoveItemModal from "../components/ConfirmRemoveItemModal";
+import CheckoutColumn from "../components/CheckoutColumn";
 
 const BasketScreen = () => {
   const params = useParams();
@@ -76,25 +77,10 @@ const BasketScreen = () => {
             })
           )}
         </div>
-        <div className="checkout-column main-border">
-          <div>
-            <div>
-              Subtotal ({basketItems.reduce((acc, item) => acc + item.qty, 0)})
-              items
-            </div>
-            £
-            {basketItems
-              .reduce((acc, item) => acc + item.qty * item.price, 0)
-              .toFixed(2)}
-          </div>
-          <button
-            className="button add-to-basket-button"
-            onClick={handleCheckout}
-          >
-            <i className="bi bi-basket2"></i>
-            <span> Go to checkout</span>
-          </button>
-        </div>
+        <CheckoutColumn
+          handleNext={handleCheckout}
+          buttonText={"Go to delivery"}
+        />
       </div>
     </>
   );

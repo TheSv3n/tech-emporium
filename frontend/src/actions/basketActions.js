@@ -38,3 +38,12 @@ export const removeFromBasket = (id) => (dispatch, getState) => {
     JSON.stringify(getState().basket.basketItems)
   );
 };
+
+export const saveDeliveryAddress = (data) => (dispatch) => {
+  dispatch({
+    type: BASKET_SAVE_DELIVERY_ADDRESS,
+    payload: data,
+  });
+
+  localStorage.setItem("deliveryAddress", JSON.stringify(data));
+};
