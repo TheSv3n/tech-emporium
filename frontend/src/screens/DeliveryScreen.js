@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { saveDeliveryAddress } from "../actions/basketActions";
+import {
+  saveDeliveryAddress,
+  savePaymentMethod,
+} from "../actions/basketActions";
 import CheckoutColumn from "../components/CheckoutColumn";
 import "../css/DeliveryScreen.css";
 
@@ -13,6 +16,7 @@ const DeliveryScreen = () => {
   const [city, setCity] = useState(deliveryAddress.city);
   const [postCode, setPostCode] = useState(deliveryAddress.postCode);
   const [country, setCountry] = useState(deliveryAddress.country);
+  const [paymentMethod, setPaymentMethod] = useState("PayPal");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -20,7 +24,8 @@ const DeliveryScreen = () => {
   const handleGoToPayment = (e) => {
     e.preventDefault();
     dispatch(saveDeliveryAddress({ address, city, postCode, country }));
-    navigate("/payment");
+    dispatch(savePaymentMethod(paymentMethod));
+    navigate("/placeorder");
   };
 
   return (
@@ -71,9 +76,29 @@ const DeliveryScreen = () => {
           required
         />
       </form>
+      <div className="delivery-page-title">Payment Method</div>
+      <form className="payment-method-form-container" label="Select Method">
+        <input
+          type="radio"
+          id="payPal"
+          name="payment_method"
+          value="PayPal"
+          checked
+          onChange={(e) => setPaymentMethod(e.target.value)}
+        />
+        <label for="payPal">Paypal or Credit/Debit Card</label>
+        <input
+          type="radio"
+          id="applePay"
+          name="payment_method"
+          value="ApplePay"
+          onChange={(e) => setPaymentMethod(e.target.value)}
+        />
+        <label for="applePay">Apple Pay</label>
+      </form>
       <CheckoutColumn
         handleNext={handleGoToPayment}
-        buttonText={"Go to payment"}
+        buttonText={"Go to checkout"}
       />
     </div>
   );

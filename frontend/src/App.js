@@ -9,6 +9,7 @@ import BasketScreen from "./screens/BasketScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import DeliveryScreen from "./screens/DeliveryScreen";
+import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
         <Header />
         <main>
           <Routes>
-            <Route path="/delivery" element={<DeliveryScreen />} />
+            <Route path="/placeorder/" element={<PlaceOrderScreen />} />
+            <Route path="/delivery/" element={<DeliveryScreen />} />
             <Route path="/login/" element={<LoginScreen />} />
             <Route path="/register/" element={<RegisterScreen />} />
             <Route path="/basket/" element={<BasketScreen />} />
