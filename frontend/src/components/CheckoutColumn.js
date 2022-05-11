@@ -1,25 +1,61 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-const CheckoutColumn = ({ handleNext, buttonText }) => {
+const CheckoutColumn = ({
+  handleNext,
+  buttonText,
+  prices,
+  placeOrder,
+  loading,
+}) => {
   const basket = useSelector((state) => state.basket);
   const { basketItems } = basket;
   return (
-    <div className="checkout-column main-border">
-      <div>
+    <div
+      className={`checkout-column main-border ${
+        placeOrder && "place-order-column"
+      }`}
+    >
+      {prices ? (
+        <>
+          <div>
+            <div>
+              Items Subtotal (
+              {basketItems.reduce((acc, item) => acc + item.qty, 0)}) items
+            </div>
+            £
+            {basketItems
+              .reduce((acc, item) => acc + item.qty * item.price, 0)
+              .toFixed(2)}
+          </div>
+          <div>
+            Delivery Subtotal <div>£{prices.deliveryPrice}</div>
+          </div>
+          <div>
+            Order Total <div>£{prices.totalPrice}</div>
+          </div>
+        </>
+      ) : (
         <div>
-          Subtotal ({basketItems.reduce((acc, item) => acc + item.qty, 0)})
-          items
+          <div>
+            Subtotal ({basketItems.reduce((acc, item) => acc + item.qty, 0)})
+            items
+          </div>
+          £
+          {basketItems
+            .reduce((acc, item) => acc + item.qty * item.price, 0)
+            .toFixed(2)}
         </div>
-        £
-        {basketItems
-          .reduce((acc, item) => acc + item.qty * item.price, 0)
-          .toFixed(2)}
-      </div>
-      <button className="button add-to-basket-button" onClick={handleNext}>
-        <i className="bi bi-basket2"></i>
-        <span> {buttonText}</span>
-      </button>
+      )}
+
+      {loading ? (
+        <div className="loader" />
+      ) : (
+        <button className="button add-to-basket-button" onClick={handleNext}>
+          <i className="bi bi-basket2"></i>
+          <span> {buttonText}</span>
+        </button>
+      )}
     </div>
   );
 };

@@ -1,0 +1,21 @@
+.place-order-page-grid-container {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.place-order-page-title {
+    font-size: 24px;
+    grid-column: 1/4;
+}
+
+.place-order-items-container {
+    grid-column: 1/4;
+}
+
+.place-order-page-subtitle {
+    font-size: 20px;
+    grid-column: 1/4;
+}
+
+.place-order-column {
+    max-height: 350px;    
+}
