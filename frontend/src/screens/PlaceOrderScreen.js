@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createOrder } from "../actions/orderActions";
 import CheckoutColumn from "../components/CheckoutColumn";
 import "../css/PlaceOrderScreen.css";
+import OrderListItem from "../components/OrderListItem";
 
 const PlaceOrderScreen = () => {
   const dispatch = useDispatch();
@@ -56,8 +57,31 @@ const PlaceOrderScreen = () => {
     <div className="main-grid-container place-order-page-grid-container main-border">
       <div className="place-order-page-title">Your Order</div>
       <div className="place-order-items-container">
+        <div className="place-order-page-subtitle">Payment</div>
+        <div>
+          <strong>Method: </strong>
+          {basket.paymentMethod}
+        </div>
+
         <div className="place-order-page-subtitle">Items</div>
-        <div className="place-order-page-subtitle">Delivery Address</div>
+        {basket.basketItems.length === 0 ? (
+          <div>Your cart is empty</div>
+        ) : (
+          <ul>
+            {basket.basketItems.map((item, index) => (
+              <OrderListItem item={item} key={index} />
+            ))}
+          </ul>
+        )}
+        <div className="place-order-page-subtitle">Delivery</div>
+        <div>
+          <strong>Address: </strong>
+          {basket.deliveryAddress.address}, {basket.deliveryAddress.city}{" "}
+          {basket.deliveryAddress.postCode}, {basket.deliveryAddress.country}
+        </div>
+        <div>
+          <strong>Method: </strong>
+        </div>
       </div>
       <CheckoutColumn
         handleNext={placeOrderHandler}
