@@ -4,19 +4,24 @@ import { useNavigate } from "react-router-dom";
 import {
   saveDeliveryAddress,
   savePaymentMethod,
+  saveDeliveryMethod,
 } from "../actions/basketActions";
 import CheckoutColumn from "../components/CheckoutColumn";
 import "../css/DeliveryScreen.css";
 
 const DeliveryScreen = () => {
   const basket = useSelector((state) => state.basket);
-  const { deliveryAddress } = basket;
 
-  const [address, setAddress] = useState(deliveryAddress.address);
-  const [city, setCity] = useState(deliveryAddress.city);
-  const [postCode, setPostCode] = useState(deliveryAddress.postCode);
-  const [country, setCountry] = useState(deliveryAddress.country);
-  const [paymentMethod, setPaymentMethod] = useState("PayPal");
+  const [address, setAddress] = useState(basket.deliveryAddress.address);
+  const [city, setCity] = useState(basket.deliveryAddress.city);
+  const [postCode, setPostCode] = useState(basket.deliveryAddress.postCode);
+  const [country, setCountry] = useState(basket.deliveryAddress.country);
+  const [deliveryMethod, setDeliveryMethod] = useState(
+    basket.deliveryMethod || "standard"
+  );
+  const [paymentMethod, setPaymentMethod] = useState(
+    basket.paymentMethod || "payPal"
+  );
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,6 +29,7 @@ const DeliveryScreen = () => {
   const handleGoToPayment = (e) => {
     e.preventDefault();
     dispatch(saveDeliveryAddress({ address, city, postCode, country }));
+    dispatch(saveDeliveryMethod(deliveryMethod));
     dispatch(savePaymentMethod(paymentMethod));
     navigate("/placeorder");
   };
@@ -76,14 +82,35 @@ const DeliveryScreen = () => {
           required
         />
       </form>
+      <div className="delivery-page-title">Delivery Method</div>
+      <form className="payment-method-form-container" label="Select Method">
+        <input
+          type="radio"
+          id="standard"
+          name="delivery_method"
+          value="standard"
+          checked={deliveryMethod === "standard"}
+          onChange={(e) => setDeliveryMethod(e.target.value)}
+        />
+        <label for="standard">Standard (Free)</label>
+        <input
+          type="radio"
+          id="nextDay"
+          name="delivery_method"
+          value="nextDay"
+          checked={deliveryMethod === "nextDay"}
+          onChange={(e) => setDeliveryMethod(e.target.value)}
+        />
+        <label for="express">Next Day (+£10)</label>
+      </form>
       <div className="delivery-page-title">Payment Method</div>
       <form className="payment-method-form-container" label="Select Method">
         <input
           type="radio"
           id="payPal"
           name="payment_method"
-          value="PayPal"
-          checked
+          value="payPal"
+          checked={paymentMethod === "payPal"}
           onChange={(e) => setPaymentMethod(e.target.value)}
         />
         <label for="payPal">Paypal or Credit/Debit Card</label>
@@ -91,7 +118,8 @@ const DeliveryScreen = () => {
           type="radio"
           id="applePay"
           name="payment_method"
-          value="ApplePay"
+          value="applePay"
+          checked={paymentMethod === "applePay"}
           onChange={(e) => setPaymentMethod(e.target.value)}
         />
         <label for="applePay">Apple Pay</label>

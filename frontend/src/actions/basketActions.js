@@ -3,6 +3,7 @@ import {
   BASKET_ADD_ITEM,
   BASKET_REMOVE_ITEM,
   BASKET_SAVE_DELIVERY_ADDRESS,
+  BASKET_SAVE_DELIVERY_METHOD,
   BASKET_SAVE_PAYMENT_METHOD,
 } from "../constants/basketConstants";
 
@@ -46,6 +47,15 @@ export const saveDeliveryAddress = (data) => (dispatch) => {
   });
 
   localStorage.setItem("deliveryAddress", JSON.stringify(data));
+};
+
+export const saveDeliveryMethod = (data) => (dispatch) => {
+  dispatch({
+    type: BASKET_SAVE_DELIVERY_METHOD,
+    payload: data,
+  });
+
+  localStorage.setItem("deliveryMethod", JSON.stringify(data));
 };
 
 export const savePaymentMethod = (data) => (dispatch) => {
