@@ -5,6 +5,8 @@ import { createOrder } from "../actions/orderActions";
 import CheckoutColumn from "../components/CheckoutColumn";
 import "../css/PlaceOrderScreen.css";
 import OrderListItem from "../components/OrderListItem";
+import { clearBasketItems } from "../actions/basketActions";
+import { ORDER_CREATE_RESET } from "../constants/orderConstants";
 
 const PlaceOrderScreen = () => {
   const dispatch = useDispatch();
@@ -22,7 +24,9 @@ const PlaceOrderScreen = () => {
     basket.basketItems.reduce((acc, item) => acc + item.price * item.qty, 0)
   );
 
-  basket.deliveryPrice = addDecimals(basket.itemsPrice > 100 ? 0 : 10);
+  basket.deliveryPrice = addDecimals(
+    basket.deliveryMethod === "nextDay" ? 10 : 0
+  );
 
   basket.taxPrice = addDecimals(Number((0 * basket.itemsPrice).toFixed(2)));
 
@@ -45,6 +49,8 @@ const PlaceOrderScreen = () => {
   useEffect(() => {
     if (success) {
       navigate(`/order/${order._id}`);
+      dispatch(clearBasketItems());
+      dispatch({ type: ORDER_CREATE_RESET });
     }
     // eslint-disable-next-line
   }, [navigate, success]);
@@ -54,6 +60,7 @@ const PlaceOrderScreen = () => {
       createOrder({
         orderItems: basket.basketItems,
         deliveryAddress: basket.deliveryAddress,
+        deliveryMethod: basket.deliveryMethod,
         paymentMethod: basket.paymentMethod,
         itemsPrice: basket.itemsPrice,
         deliveryPrice: basket.deliveryPrice,

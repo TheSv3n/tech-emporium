@@ -1,6 +1,7 @@
 import axios from "axios";
 import {
   BASKET_ADD_ITEM,
+  BASKET_ITEMS_RESET,
   BASKET_REMOVE_ITEM,
   BASKET_SAVE_DELIVERY_ADDRESS,
   BASKET_SAVE_DELIVERY_METHOD,
@@ -65,4 +66,14 @@ export const savePaymentMethod = (data) => (dispatch) => {
   });
 
   localStorage.setItem("paymentMethod", JSON.stringify(data));
+};
+
+export const clearBasketItems = () => (dispatch, getState) => {
+  dispatch({
+    type: BASKET_ITEMS_RESET,
+  });
+  localStorage.setItem(
+    "basketItems",
+    JSON.stringify(getState().basket.basketItems)
+  );
 };

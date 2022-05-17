@@ -4,6 +4,7 @@ import {
   BASKET_SAVE_DELIVERY_ADDRESS,
   BASKET_SAVE_PAYMENT_METHOD,
   BASKET_SAVE_DELIVERY_METHOD,
+  BASKET_ITEMS_RESET,
 } from "../constants/basketConstants";
 
 export const basketReducer = (
@@ -42,6 +43,11 @@ export const basketReducer = (
       return {
         ...state,
         deliveryAddress: action.payload,
+      };
+    case BASKET_ITEMS_RESET:
+      return {
+        ...state,
+        basketItems: [],
       };
     case BASKET_SAVE_DELIVERY_METHOD:
       return {
