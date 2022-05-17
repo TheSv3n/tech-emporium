@@ -32,6 +32,16 @@ const PlaceOrderScreen = () => {
     Number(basket.taxPrice)
   ).toFixed(2);
 
+  const deliveryMethodDescription =
+    basket.deliveryMethod === "standard"
+      ? "Standard Delivery (Free)"
+      : basket.deliveryMethod === "nextDay" && "Next Day (+£10)";
+
+  const paymentMethodDescription =
+    basket.paymentMethod === "payPal"
+      ? "PayPal"
+      : basket.paymentMethod === "applePay" && "Apple Pay";
+
   useEffect(() => {
     if (success) {
       navigate(`/order/${order._id}`);
@@ -60,7 +70,7 @@ const PlaceOrderScreen = () => {
         <div className="place-order-page-subtitle">Payment</div>
         <div>
           <strong>Method: </strong>
-          {basket.paymentMethod}
+          {paymentMethodDescription}
         </div>
 
         <div className="place-order-page-subtitle">Items</div>
@@ -81,6 +91,7 @@ const PlaceOrderScreen = () => {
         </div>
         <div>
           <strong>Method: </strong>
+          {deliveryMethodDescription}
         </div>
       </div>
       <CheckoutColumn
