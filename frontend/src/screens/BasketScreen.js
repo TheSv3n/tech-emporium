@@ -80,6 +80,7 @@ const BasketScreen = () => {
         <CheckoutColumn
           handleNext={handleCheckout}
           buttonText={"Go to delivery"}
+          buttonDisable={basketItems.length === 0}
         />
       </div>
     </>

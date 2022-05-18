@@ -7,6 +7,7 @@ const CheckoutColumn = ({
   prices,
   placeOrder,
   loading,
+  buttonDisable,
 }) => {
   const basket = useSelector((state) => state.basket);
   const { basketItems } = basket;
@@ -50,6 +51,8 @@ const CheckoutColumn = ({
 
       {loading ? (
         <div className="loader" />
+      ) : buttonDisable ? (
+        ""
       ) : (
         <button className="button add-to-basket-button" onClick={handleNext}>
           <i className="bi bi-basket2"></i>

@@ -1,0 +1,17 @@
+.order-page-grid-container {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.order-page-title {
+    font-size: 24px;
+    grid-column: 1/4;
+}
+
+.order-items-container {
+    grid-column: 1/4;
+}
+
+.order-page-subtitle {
+    font-size: 20px;
+    grid-column: 1/4;
+}
