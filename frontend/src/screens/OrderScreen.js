@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrderDetails } from "../actions/orderActions";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import "../css/OrderScreen.css";
 
 const OrderScreen = () => {
@@ -67,6 +67,33 @@ const OrderScreen = () => {
                 <strong>Method: </strong>
                 {order.paymentMethod}
               </p>
+            </div>
+            <div className="order-item-group-container main-border">
+              <div className="order-page-subtitle">Order Items</div>
+              {order.orderItems.map((item, index) => (
+                <div key={index} className="order-list-item-grid-container">
+                  <div>
+                    <img
+                      className="order-list-item-image"
+                      src={item.image}
+                      alt={item.name}
+                      fluid
+                      rounded
+                    />
+                  </div>
+                  <div className="order-list-item-name">
+                    <Link
+                      to={`/product/${item.product}`}
+                      className="order-list-item-name"
+                    >
+                      {item.name}
+                    </Link>
+                  </div>
+                  <div className="order-list-item-price">
+                    {item.qty} x ${item.price} = ${item.qty * item.price}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
