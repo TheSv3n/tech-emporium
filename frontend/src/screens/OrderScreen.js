@@ -13,6 +13,7 @@ import {
   ORDER_PAY_RESET,
   ORDER_DELIVER_RESET,
 } from "../constants/orderConstants";
+import Alert from "../components/Alert";
 
 const OrderScreen = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,9 @@ const OrderScreen = () => {
 
   const orderPay = useSelector((state) => state.orderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
+
+  const orderDeliver = useSelector((state) => state.orderDeliver);
+  const { loading: loadingDeliver, success: successDeliver } = orderDeliver;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -56,8 +60,9 @@ const OrderScreen = () => {
       };
       document.body.appendChild(script);
     };
-    if (!order || order._id !== orderId || successPay) {
+    if (!order || order._id !== orderId || successPay || successDeliver) {
       dispatch({ type: ORDER_PAY_RESET });
+      dispatch({ type: ORDER_DELIVER_RESET });
       dispatch(getOrderDetails(orderId));
     } else if (!order.isPaid) {
       if (!window.paypal) {
@@ -66,11 +71,23 @@ const OrderScreen = () => {
         setSdkReady(true);
       }
     }
-  }, [dispatch, order, orderId, userInfo, navigate, successPay]);
+  }, [
+    dispatch,
+    order,
+    orderId,
+    userInfo,
+    navigate,
+    successPay,
+    successDeliver,
+  ]);
 
   const successPaymentHandler = (paymentResult) => {
     console.log(paymentResult);
     dispatch(payOrder(orderId, paymentResult));
+  };
+
+  const deliverHandler = () => {
+    dispatch(deliverOrder(order));
   };
 
   return (
@@ -97,6 +114,11 @@ const OrderScreen = () => {
                 {order.deliveryAddress.postCode},{" "}
                 {order.deliveryAddress.country}
               </p>
+              {order.isDelivered ? (
+                <Alert variant="green">Delivered</Alert>
+              ) : (
+                <Alert variant="red">Not Delivered</Alert>
+              )}
             </div>
             <div className="order-item-group-container main-border">
               <div className="order-page-subtitle">Payment Method</div>
@@ -104,6 +126,11 @@ const OrderScreen = () => {
                 <strong>Method: </strong>
                 {order.paymentMethod}
               </p>
+              {order.isPaid ? (
+                <Alert variant="green">Paid</Alert>
+              ) : (
+                <Alert variant="red">Not Paid</Alert>
+              )}
             </div>
             <div className="order-item-group-container main-border">
               <div className="order-page-subtitle">Order Items</div>
@@ -165,6 +192,17 @@ const OrderScreen = () => {
                 )}
               </>
             )}
+            {userInfo &&
+              userInfo.isAdmin &&
+              order.isPaid &&
+              !order.isDelivered &&
+              (loadingDeliver ? (
+                <div className="loader" />
+              ) : (
+                <button className="button" onClick={deliverHandler}>
+                  Mark as Delivered
+                </button>
+              ))}
           </div>
         </div>
       )}
