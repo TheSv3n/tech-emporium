@@ -22,6 +22,9 @@ const OrderScreen = () => {
   const orderId = params.id;
 
   const [sdkReady, setSdkReady] = useState(false);
+  const [deliveryMethodDescription, setDeliveryMethodDescription] =
+    useState("");
+  const [paymentMethodDescription, setPaymentMethodDescription] = useState("");
 
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
@@ -70,6 +73,17 @@ const OrderScreen = () => {
       } else {
         setSdkReady(true);
       }
+    } else {
+      setPaymentMethodDescription(
+        order.paymentMethod === "payPal"
+          ? "PayPal"
+          : order.paymentMethod === "applePay" && "Apple Pay"
+      );
+      setDeliveryMethodDescription(
+        order.deliveryMethod === "standard"
+          ? "Standard Delivery"
+          : order.deliveryMethod === "nextDay" && "Next Day"
+      );
     }
   }, [
     dispatch,
@@ -79,6 +93,7 @@ const OrderScreen = () => {
     navigate,
     successPay,
     successDeliver,
+    setPaymentMethodDescription,
   ]);
 
   const successPaymentHandler = (paymentResult) => {
@@ -106,6 +121,7 @@ const OrderScreen = () => {
                 <strong>Name: </strong> {order.user.name}
               </p>
               <p>
+                <strong>Email: </strong>
                 <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
               </p>
               <p>
@@ -113,6 +129,10 @@ const OrderScreen = () => {
                 {order.deliveryAddress.address}, {order.deliveryAddress.city}{" "}
                 {order.deliveryAddress.postCode},{" "}
                 {order.deliveryAddress.country}
+              </p>
+              <p>
+                <strong>Method: </strong>
+                {deliveryMethodDescription}
               </p>
               {order.isDelivered ? (
                 <Alert variant="green">Delivered</Alert>
@@ -124,7 +144,7 @@ const OrderScreen = () => {
               <div className="order-page-subtitle">Payment Method</div>
               <p>
                 <strong>Method: </strong>
-                {order.paymentMethod}
+                {paymentMethodDescription}
               </p>
               {order.isPaid ? (
                 <Alert variant="green">Paid</Alert>
@@ -162,22 +182,18 @@ const OrderScreen = () => {
             </div>
           </div>
           <div className="order-summary-column main-border">
-            <div>
-              <div>
-                Items Subtotal (
-                {order.orderItems.reduce((acc, item) => acc + item.qty, 0)})
-                items
-              </div>
-              £
+            <div className="order-page-subtitle">Summary</div>
+            <div className="order-summary-column-row">
+              <div>Items</div>£
               {order.orderItems
                 .reduce((acc, item) => acc + item.qty * item.price, 0)
                 .toFixed(2)}
             </div>
-            <div>
-              Delivery Subtotal <div>£{order.deliveryPrice}</div>
+            <div className="order-summary-column-row">
+              Delivery <div>£{order.deliveryPrice}</div>
             </div>
-            <div>
-              Order Total <div>£{order.totalPrice.toFixed(2)}</div>
+            <div className="order-summary-column-row">
+              Total <div>£{order.totalPrice.toFixed(2)}</div>
             </div>
             {!order.isPaid && (
               <>
