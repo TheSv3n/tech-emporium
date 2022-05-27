@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Alert from "../components/Alert";
-import { getUserDetails, updateUserProfile } from "../actions/userActions";
+import {
+  getUserDetails,
+  updateUserProfile,
+  logout,
+} from "../actions/userActions";
 import { USER_UPDATE_PROFILE_RESET } from "../constants/userConstants";
 import "../css/ProfileScreen.css";
 import { listUserOrders } from "../actions/orderActions";
@@ -26,13 +30,17 @@ const ProfileScreen = () => {
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   const { success, loading: loadingUpdate } = userUpdateProfile;
 
+  const orderListUser = useSelector((state) => state.orderListUser);
+  const { loading: loadingOrders, error: errorOrders, orders } = orderListUser;
+
   useEffect(() => {
     if (!userInfo) {
-      navigate("/login");
+      navigate(`/login?redirect=profile`);
     } else {
       if (!user || !user.name || success) {
         dispatch({ type: USER_UPDATE_PROFILE_RESET });
         dispatch(getUserDetails("profile"));
+        dispatch(listUserOrders());
       } else {
         setName(user.name);
         setEmail(user.email);
@@ -47,6 +55,10 @@ const ProfileScreen = () => {
     } else {
       dispatch(updateUserProfile({ id: user._id, name, email, password }));
     }
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
   };
 
   return (
@@ -107,6 +119,9 @@ const ProfileScreen = () => {
                 Update
               </button>
             )}
+            <button className="button logout-button" onClick={handleLogout}>
+              Logout
+            </button>
           </form>
         )}
       </div>
@@ -122,6 +137,35 @@ const ProfileScreen = () => {
               <th>DELIVERED</th>
             </tr>
           </thead>
+          <tbody>
+            {orders &&
+              orders.map((order) => (
+                <tr key={order._id}>
+                  <td>{order._id}</td>
+                  <td>{order.createdAt.substring(0, 10)}</td>
+                  <td>£{order.totalPrice.toFixed(2)}</td>
+                  <td>
+                    {order.isPaid ? (
+                      order.paidAt.substring(0, 10)
+                    ) : (
+                      <i className="bi bi-x" style={{ color: "red" }}></i>
+                    )}
+                  </td>
+                  <td>
+                    {order.isDelivered ? (
+                      order.deliveredAt.substring(0, 10)
+                    ) : (
+                      <i className="bi bi-x" style={{ color: "red" }}></i>
+                    )}
+                  </td>
+                  <td>
+                    <Link to={`/order/${order._id}`} className="details-link">
+                      Details
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
         </table>
       </div>
     </div>

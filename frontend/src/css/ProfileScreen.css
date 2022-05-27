@@ -31,7 +31,31 @@
     margin: 8px 0;
 }
 
+.logout-button {
+    margin: 0px 8px;
+}
+
+thead {
+    font-size: .875rem;
+    line-height: 1.5;
+    text-align: left;
+}
+
 table {
     width: 100%;
     margin-bottom: 1rem;
+}
+
+td {
+    border: 1px solid rgba(0, 0, 0, .05);
+    padding: 8px;
+}
+
+th {
+    padding: 0 8px;
+    border: 1px solid rgba(0, 0, 0, .05);
+}
+
+.details-link {
+    color: var(--davysGray);
 }
