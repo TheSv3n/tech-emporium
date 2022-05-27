@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { listProductDetails } from "../actions/productActions";
+import {
+  listProductDetails,
+  createProductReview,
+} from "../actions/productActions";
 import "../css/ProductScreen.css";
 import PurchaseColumn from "../components/PurchaseColumn";
 import AddToBasketModal from "../components/AddToBasketModal";
 import { addToBasket } from "../actions/basketActions";
+import RatingWidget from "../components/RatingWidget";
+import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
 
 const ProductScreen = () => {
   const params = useParams();
@@ -71,7 +76,7 @@ const ProductScreen = () => {
               setQuantity={setQuantity}
             />
             <div className="specification-container">
-              <div className="specification-title">Specifications</div>
+              <div className="product-page-subtitle">Specifications</div>
               {productSpecs.length === 0 ? (
                 <div>No Specs Available</div>
               ) : (
@@ -84,6 +89,9 @@ const ProductScreen = () => {
                   );
                 })
               )}
+            </div>
+            <div className="reviews-container">
+              <div className="product-page-subtitle">Reviews</div>
             </div>
           </div>
         </>

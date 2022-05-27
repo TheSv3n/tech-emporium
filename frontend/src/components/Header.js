@@ -23,7 +23,7 @@ const Header = () => {
             </span>
           </Link>
           {userInfo ? (
-            <Link to="/profile" className="header-textt">
+            <Link to="/profile" className="header-text">
               <span className="menu-item">
                 <i className="bi bi-person" /> Profile
               </span>
