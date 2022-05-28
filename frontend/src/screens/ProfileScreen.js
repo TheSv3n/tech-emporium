@@ -93,7 +93,7 @@ const ProfileScreen = () => {
               required
             />
 
-            <div className="address-form-label">Password</div>
+            <div className="profile-form-label">Password</div>
             <input
               type="password"
               placeholder="Enter Password"
@@ -103,7 +103,7 @@ const ProfileScreen = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
 
-            <div className="address-form-label">Confirm Password</div>
+            <div className="profile-form-label">Confirm Password</div>
             <input
               type="password"
               placeholder="Confirm Password"

@@ -45,3 +45,10 @@
 .add-to-basket-button {
     min-width: 169px;    
 }
+
+.review-field {
+    font-size: 1.2em;
+    min-width: 90%;
+    border-radius: 10px;
+    margin-top: 8px;
+}

@@ -11,6 +11,7 @@ import AddToBasketModal from "../components/AddToBasketModal";
 import { addToBasket } from "../actions/basketActions";
 import RatingWidget from "../components/RatingWidget";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
+import Alert from "../components/Alert";
 
 const ProductScreen = () => {
   const params = useParams();
@@ -21,6 +22,8 @@ const ProductScreen = () => {
   const [productSpecs, setProductSpecs] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const [showAddToBasketModal, setShowAddToBasketModal] = useState(false);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
 
   const updateShowAddToBasketModal = () => {
     setShowAddToBasketModal(!showAddToBasketModal);
@@ -38,13 +41,29 @@ const ProductScreen = () => {
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
+  const productReviewCreate = useSelector((state) => state.productReviewCreate);
+  const { success: successProductReview, error: errorProductReview } =
+    productReviewCreate;
+
   useEffect(() => {
-    if (!product || product._id !== productId) {
+    if (!product || product._id !== productId || successProductReview) {
       dispatch(listProductDetails(productId));
     } else {
       setProductSpecs(product.specifications);
     }
-  }, [dispatch, productId, product]);
+    if (successProductReview) {
+      alert("Review Submitted");
+      setRating(0);
+      setComment("");
+      dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
+    }
+  }, [dispatch, productId, product, successProductReview]);
+
+  const submitReview = (e) => {
+    e.preventDefault();
+    dispatch(createProductReview(productId, { rating, comment }));
+  };
+
   return (
     <>
       {loading ? (
@@ -91,7 +110,38 @@ const ProductScreen = () => {
               )}
             </div>
             <div className="reviews-container">
+              <div className="product-page-subtitle">Write a Review</div>
+              <form className="profile-form-container" onSubmit={submitReview}>
+                {errorProductReview && (
+                  <Alert variant="red">{errorProductReview}</Alert>
+                )}
+                <RatingWidget
+                  value={rating}
+                  color={"orange"}
+                  newReview={true}
+                  setRating={setRating}
+                />
+                <textarea
+                  placeholder="Enter Comment"
+                  name="comment"
+                  className="review-field"
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                  required
+                />
+                <button className="button update-button" type="submit">
+                  Submit
+                </button>
+              </form>
               <div className="product-page-subtitle">Reviews</div>
+              {product.reviews.map((review) => (
+                <>
+                  <strong>{review.name}</strong>
+                  <RatingWidget value={review.rating} color={"orange"} />
+                  <p>{review.createdAt.substring(0, 10)}</p>
+                  <p>{review.comment}</p>
+                </>
+              ))}
             </div>
           </div>
         </>
