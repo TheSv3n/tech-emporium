@@ -35,6 +35,13 @@ const Header = () => {
               </span>
             </Link>
           )}
+          {userInfo && userInfo.isAdmin && (
+            <Link to="/admin" className="header-text">
+              <span className="menu-item">
+                <i className="bi bi bi-gear" /> Admin
+              </span>
+            </Link>
+          )}
         </div>
       </div>
     </header>
