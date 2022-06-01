@@ -1,51 +1,55 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import {
-  listProducts,
-  deleteProduct,
-  createProduct,
-} from "../actions/productActions";
-import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import AdminOrderOptions from "../components/AdminOrderOptions";
+import AdminProductOptions from "../components/AdminProductOptions";
+import AdminUserOptions from "../components/AdminUserOptions";
+import "../css/AdminScreen.css";
 
 const AdminScreen = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const params = useParams();
-
-  const pageNumber = params.pageNumber || 1;
+  const [view, setView] = useState("users");
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
-  const productList = useSelector((state) => state.productList);
-  const { loading, error, products, pages, page } = productList;
-
-  const productCreate = useSelector((state) => state.productCreate);
-  const {
-    loading: loadingCreate,
-    error: errorCreate,
-    success: successCreate,
-    product: createdProduct,
-  } = productCreate;
-
   useEffect(() => {
-    dispatch({ type: PRODUCT_CREATE_RESET });
-
     if (!userInfo.isAdmin) {
       navigate(`/login`);
     }
-
-    if (successCreate) {
-      navigate(`/admin/product/${createdProduct._id}/edit`);
-    } else {
-      dispatch(listProducts("", pageNumber));
-    }
-  }, [dispatch, userInfo, successCreate, createdProduct, pageNumber]);
+  }, [userInfo, navigate]);
 
   return (
     <div className="main-grid-container main-border admin-page-grid-container">
-      AdminScreen
+      <div className="admin-page-button-row">
+        <button
+          className={`button admin-button ${
+            view === "products" && "inactive-button"
+          }`}
+          onClick={() => setView("products")}
+        >
+          Products
+        </button>
+        <button
+          className={`button admin-button ${
+            view === "orders" && "inactive-button"
+          }`}
+          onClick={() => setView("orders")}
+        >
+          Orders
+        </button>
+        <button
+          className={`button admin-button ${
+            view === "users" && "inactive-button"
+          }`}
+          onClick={() => setView("users")}
+        >
+          Users
+        </button>
+      </div>
+      {view === "products" && <AdminProductOptions />}
+      {view === "orders" && <AdminOrderOptions />}
+      {view === "users" && <AdminUserOptions />}
     </div>
   );
 };

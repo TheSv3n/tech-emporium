@@ -24,6 +24,7 @@ const HomeScreen = () => {
         {loading ? (
           <div className="loader"></div>
         ) : (
+          products &&
           products.map((product) => (
             <ProductCard key={product._id} product={product} />
           ))
