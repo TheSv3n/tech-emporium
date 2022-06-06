@@ -2,9 +2,19 @@
     grid-template-columns: repeat(3, 1fr);
 }
 
+.admin-page-title {
+    font-size: 24px;
+    grid-column: 1/4;
+}
+
 .admin-page-button-row {
     grid-column: 1/4;
     text-align: center;
+}
+
+.new-product-button-row {
+    text-align: right;
+    margin-bottom: 8px;
 }
 
 .admin-button {
@@ -21,4 +31,20 @@
     background-color: var(--eggShell);
     color: var(--cardinal);
     cursor: default;
+}
+
+.product-admin-container {
+    grid-column: 1/4;
+}
+
+.icon-grey { 
+    color: var(--davysGray);
+}
+
+.icon-red {
+    color: var(--cardinal);
+}
+
+.icon:hover {
+    cursor: pointer;
 }

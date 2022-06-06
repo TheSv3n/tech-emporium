@@ -5,7 +5,7 @@ import Product from "../models/productModel.js";
 //@route GET /api/products
 //@access Public
 const getProducts = asyncHandler(async (req, res) => {
-  const pageSize = 10;
+  const pageSize = 12;
   const page = Number(req.query.pageNumber) || 1;
 
   const keyword = req.query.keyword
@@ -137,10 +137,26 @@ const createProductReview = asyncHandler(async (req, res) => {
   }
 });
 
+//@desc Delete a product
+//@route DELETE /api/products/:id
+//@access Private/Admin
+const deleteProduct = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.params.id);
+
+  if (product) {
+    await product.remove();
+    res.json({ message: "Product removed" });
+  } else {
+    res.status(404);
+    throw new Error("Product not found");
+  }
+});
+
 export {
   getProducts,
   getProductById,
   createProduct,
   updateProduct,
   createProductReview,
+  deleteProduct,
 };

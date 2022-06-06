@@ -8,7 +8,7 @@ import "../css/AdminScreen.css";
 
 const AdminScreen = () => {
   const navigate = useNavigate();
-  const [view, setView] = useState("users");
+  const [view, setView] = useState("products");
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -21,6 +21,7 @@ const AdminScreen = () => {
 
   return (
     <div className="main-grid-container main-border admin-page-grid-container">
+      <div className="admin-page-title">Admin Options</div>
       <div className="admin-page-button-row">
         <button
           className={`button admin-button ${
