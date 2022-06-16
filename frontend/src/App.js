@@ -13,6 +13,7 @@ import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 import AdminScreen from "./screens/AdminScreen";
+import ProductEditScreen from "./screens/ProductEditScreen";
 
 function App() {
   return (
@@ -22,6 +23,10 @@ function App() {
         <main>
           <Routes>
             <Route path="/admin/" element={<AdminScreen />} />
+            <Route
+              path="/admin/product/:id/edit"
+              element={<ProductEditScreen />}
+            />
             <Route path="/profile/" element={<ProfileScreen />} />
             <Route path="/order/:id" element={<OrderScreen />} />
             <Route path="/placeorder/" element={<PlaceOrderScreen />} />
