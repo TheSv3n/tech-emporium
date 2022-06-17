@@ -22,6 +22,7 @@ const ProductEditScreen = () => {
   const [countInStock, setCountInStock] = useState(0);
   const [description, setDescription] = useState("");
   const [uploading, setUploading] = useState(false);
+  const [imageName, setImageName] = useState("No Image");
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
@@ -36,7 +37,7 @@ const ProductEditScreen = () => {
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: PRODUCT_UPDATE_RESET });
-      navigate("/admin/productlist");
+      navigate("/admin");
     } else {
       if (!product.name || product._id !== productId) {
         dispatch(listProductDetails(productId));
@@ -69,10 +70,17 @@ const ProductEditScreen = () => {
       const { data } = await axios.post("/api/upload", formData, config);
       setImage(data);
       setUploading(false);
+      setImageName(e.target.value);
     } catch (error) {
       console.error(error);
       setUploading(false);
     }
+  };
+
+  const clearImageHandler = () => {
+    document.getElementById("image-form").value = "";
+    setImageName("No Image");
+    setImage("");
   };
 
   const submitHandler = (e) => {
@@ -96,7 +104,7 @@ const ProductEditScreen = () => {
   return (
     <div className="main-grid-container product-edit-page-grid-container main-border">
       <div className="product-edit-page-title">Edit Product</div>
-      <form className="product-edit-form-container">
+      <form className="product-edit-form-container" onSubmit={submitHandler}>
         <div className="product-edit-form-label">Name</div>
         <input
           type="text"
@@ -107,6 +115,30 @@ const ProductEditScreen = () => {
           onChange={(e) => setName(e.target.value)}
           required
         />
+
+        <div className="image-form-row">
+          <label for="image-form" className="mr-1 my-auto">
+            <i className="fas fa-image" /> Add Image
+          </label>
+          <input
+            id="image-form"
+            type="file"
+            className="form-file"
+            onChange={uploadFileHandler}
+          />
+          {uploading ? (
+            <div className="loader" />
+          ) : (
+            <>
+              <div className="d-none d-md-flex d-lg-flex">{imageName}</div>
+              {image === "" ? (
+                ""
+              ) : (
+                <button onClick={clearImageHandler}>Clear</button>
+              )}
+            </>
+          )}
+        </div>
 
         <div className="product-edit-form-label">Brand</div>
         <input
@@ -173,6 +205,9 @@ const ProductEditScreen = () => {
           onChange={(e) => setCountInStock(e.target.value)}
           required
         />
+        <button className="button product-edit-button" type="submit">
+          <span>Submit</span>
+        </button>
       </form>
     </div>
   );

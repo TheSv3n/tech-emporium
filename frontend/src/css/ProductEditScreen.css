@@ -14,5 +14,36 @@
 
 .product-edit-field {
     font-size: 1.2em;
-    min-width: 95%;
+    min-width: 100%;
+}
+
+.image-form-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 8px;
+}
+
+label {
+    cursor: pointer;
+    background: var(--cardinal);
+    color: var(--eggShell);
+    border-radius: 15px;
+    padding: 5px;
+    margin-inline-end: 8px;
+    text-align: center;
+}
+
+label:hover {
+    background: var(--cardinalShadow);
+}
+
+#image-form {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+.product-edit-button {
+    width: 100%;
+    margin-top: 8px;
 }
