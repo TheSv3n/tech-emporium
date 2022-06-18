@@ -65,42 +65,46 @@ const AdminProductOptions = () => {
           Create Product
         </button>
       </div>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th>Brand</th>
-          </tr>
-        </thead>
-        <tbody>
-          {products &&
-            products.map((product) => (
-              <tr key={product._id}>
-                <td>{product._id}</td>
-                <td>{product.name}</td>
-                <td>£{product.price.toFixed(2)}</td>
-                <td>{product.category}</td>
-                <td>{product.brand}</td>
-                <td>
-                  <Link
-                    className="icon icon-grey"
-                    to={`/admin/product/${product._id}/edit`}
-                  >
-                    <span>
-                      <i className="bi bi-pencil-square"></i>
+      {loading ? (
+        <div className="loader" />
+      ) : (
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Category</th>
+              <th>Brand</th>
+            </tr>
+          </thead>
+          <tbody>
+            {products &&
+              products.map((product) => (
+                <tr key={product._id}>
+                  <td>{product._id}</td>
+                  <td>{product.name}</td>
+                  <td>£{product.price.toFixed(2)}</td>
+                  <td>{product.category}</td>
+                  <td>{product.brand}</td>
+                  <td>
+                    <Link
+                      className="icon icon-grey"
+                      to={`/admin/product/${product._id}/edit`}
+                    >
+                      <span>
+                        <i className="bi bi-pencil-square"></i>
+                      </span>
+                    </Link>{" "}
+                    <span onClick={() => deleteHandler(product._id)}>
+                      <i className="bi bi-trash icon icon-red"></i>
                     </span>
-                  </Link>{" "}
-                  <span onClick={() => deleteHandler(product._id)}>
-                    <i className="bi bi-trash icon icon-red"></i>
-                  </span>
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 };
