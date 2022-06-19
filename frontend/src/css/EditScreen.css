@@ -1,18 +1,18 @@
-.product-edit-page-grid-container {
+.edit-page-grid-container {
     grid-template-columns: repeat(4, 1fr);
 }
 
-.product-edit-page-title {
+.edit-page-title {
     font-size: 24px;
     grid-column: 1/4;
 }
 
-.product-edit-form-container {
+.edit-form-container {
     grid-column: 2/4;
     
 }
 
-.product-edit-field {
+.edit-field {
     font-size: 1.2em;
     min-width: 100%;
 }
@@ -43,7 +43,7 @@ label:hover {
     z-index: -1;
 }
 
-.product-edit-button {
+.edit-button {
     width: 100%;
     margin-top: 8px;
 }

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { listProductDetails, updateProduct } from "../actions/productActions";
 import { PRODUCT_UPDATE_RESET } from "../constants/productConstants";
 import axios from "axios";
-import "../css/ProductEditScreen.css";
+import "../css/EditScreen.css";
 
 const ProductEditScreen = () => {
   const params = useParams();
@@ -102,22 +102,22 @@ const ProductEditScreen = () => {
   };
 
   return (
-    <div className="main-grid-container product-edit-page-grid-container main-border">
-      <div className="product-edit-page-title">Edit Product</div>
-      <form className="product-edit-form-container" onSubmit={submitHandler}>
-        <div className="product-edit-form-label">Name</div>
+    <div className="main-grid-container edit-page-grid-container main-border">
+      <div className="edit-page-title">Edit Product</div>
+      <form className="edit-form-container" onSubmit={submitHandler}>
+        <div className="edit-form-label">Name</div>
         <input
           type="text"
           placeholder="Enter Name"
           name="name"
-          className="product-edit-field"
+          className="edit-field"
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
         />
 
         <div className="image-form-row">
-          <label for="image-form" className="mr-1 my-auto">
+          <label for="image-form">
             <i className="fas fa-image" /> Add Image
           </label>
           <input
@@ -130,7 +130,7 @@ const ProductEditScreen = () => {
             <div className="loader" />
           ) : (
             <>
-              <div className="d-none d-md-flex d-lg-flex">{imageName}</div>
+              <div>{imageName}</div>
               {image === "" ? (
                 ""
               ) : (
@@ -140,72 +140,72 @@ const ProductEditScreen = () => {
           )}
         </div>
 
-        <div className="product-edit-form-label">Brand</div>
+        <div className="edit-form-label">Brand</div>
         <input
           type="text"
           placeholder="Enter Brand"
           name="country"
-          className="product-edit-field"
+          className="edit-field"
           value={brand}
           onChange={(e) => setBrand(e.target.value)}
           required
         />
 
-        <div className="product-edit-form-label">Category</div>
+        <div className="edit-form-label">Category</div>
         <input
           type="text"
           placeholder="Enter Category"
           name="category"
-          className="product-edit-field"
+          className="edit-field"
           value={category}
           onChange={(e) => setCategory(e.target.value)}
           required
         />
 
-        <div className="product-edit-form-label">Sub-Category</div>
+        <div className="edit-form-label">Sub-Category</div>
         <input
           type="text"
           placeholder="Enter Sub-Category"
           name="sub-category"
-          className="product-edit-field"
+          className="edit-field"
           value={subCategory}
           onChange={(e) => setSubCategory(e.target.value)}
           required
         />
 
-        <div className="product-edit-form-label">Description</div>
+        <div className="edit-form-label">Description</div>
         <input
           type="text"
           placeholder="Enter Description"
           name="description"
-          className="product-edit-field"
+          className="edit-field"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           required
         />
 
-        <div className="product-edit-form-label">Price</div>
+        <div className="edit-form-label">Price</div>
         <input
           type="number"
           placeholder="Enter Price"
           name="price"
-          className="product-edit-field"
+          className="edit-field"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
           required
         />
 
-        <div className="product-edit-form-label">Count in Stock</div>
+        <div className="edit-form-label">Count in Stock</div>
         <input
           type="number"
           placeholder="Enter Count in Stock"
           name="count-in-stock"
-          className="product-edit-field"
+          className="edit-field"
           value={countInStock}
           onChange={(e) => setCountInStock(e.target.value)}
           required
         />
-        <button className="button product-edit-button" type="submit">
+        <button className="button edit-button" type="submit">
           <span>Submit</span>
         </button>
       </form>
