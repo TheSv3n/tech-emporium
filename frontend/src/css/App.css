@@ -35,7 +35,14 @@ body {
 .title-text {
     text-align: left;
     padding: 8px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 }
+
+.search-form {
+    grid-column: 2/4;
+}
+
 
 .menu-text {
     text-align: right;

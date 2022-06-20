@@ -23,6 +23,7 @@ function App() {
         <Header />
         <main>
           <Routes>
+            <Route path="/search/:keyword" element={<HomeScreen />} />
             <Route path="/admin/" element={<AdminScreen />} />
             <Route
               path="/admin/product/:id/edit"

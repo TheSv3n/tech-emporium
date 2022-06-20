@@ -65,11 +65,19 @@ const UserEditScreen = () => {
         <input
           type="text"
           placeholder="Enter Email"
-          name="country"
+          name="email"
           className="edit-field"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+        />
+
+        <div className="edit-form-label">Is Admin?</div>
+        <input
+          type="checkbox"
+          className="edit-field"
+          checked={isAdmin}
+          onChange={(e) => setIsAdmin(e.target.checked)}
         />
 
         <button className="button edit-button" type="submit">

@@ -144,7 +144,7 @@ const ProductEditScreen = () => {
         <input
           type="text"
           placeholder="Enter Brand"
-          name="country"
+          name="brand"
           className="edit-field"
           value={brand}
           onChange={(e) => setBrand(e.target.value)}
