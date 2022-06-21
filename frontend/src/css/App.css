@@ -90,3 +90,9 @@ body {
 .delete-icon:hover {
     cursor: pointer;
 }
+
+.page-title {
+    font-size: 24px;
+    grid-column: 1/7;
+    text-align: left;
+}
