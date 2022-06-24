@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../actions/productActions";
 import ProductCard from "../components/ProductCard";
@@ -19,6 +19,9 @@ const HomeScreen = () => {
   const { loading, error, products, page, pages } = productList;
 
   useEffect(() => {
+    if (sortBy) {
+      setSort(sortBy);
+    }
     dispatch(listProducts(keyword, pageNumber, sort));
   }, [dispatch, keyword, pageNumber, sort, sortBy]);
 
@@ -48,9 +51,11 @@ const HomeScreen = () => {
   return (
     <>
       <div className="top-product-grid-container">
+        {!keyword && <div className="page-title">Promotions</div>}
         <div className="page-title">
           {value} Products{" "}
-          <span>
+          <span className="view-options">
+            - view by{" "}
             <select onChange={(e) => setView(e.target.value)}>
               <option>Latest</option>
               <option>Top Rated</option>

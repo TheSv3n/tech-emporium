@@ -49,8 +49,6 @@
     height: 131px;
 }
 
-.ranked-button {
-    height: 32px;
-    padding: 0px 8px;
-    font-size: 12px;
+.view-options {
+    font-size: 16px;
 }

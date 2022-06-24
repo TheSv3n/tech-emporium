@@ -94,6 +94,11 @@ const productSchema = mongoose.Schema(
       required: false,
       default: 0,
     },
+    promotion: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: false,
+      ref: "Promotion",
+    },
   },
   {
     timestamps: true,
