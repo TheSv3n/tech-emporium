@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import AdminOrderOptions from "../components/AdminOrderOptions";
 import AdminProductOptions from "../components/AdminProductOptions";
 import AdminUserOptions from "../components/AdminUserOptions";
+import AdminPromotionOptions from "../components/AdminPromotionOptions";
 import "../css/AdminScreen.css";
 
 const AdminScreen = () => {
@@ -33,6 +34,14 @@ const AdminScreen = () => {
         </button>
         <button
           className={`button admin-button ${
+            view === "promotions" && "inactive-button"
+          }`}
+          onClick={() => setView("promotions")}
+        >
+          Promotions
+        </button>
+        <button
+          className={`button admin-button ${
             view === "orders" && "inactive-button"
           }`}
           onClick={() => setView("orders")}
@@ -49,6 +58,7 @@ const AdminScreen = () => {
         </button>
       </div>
       {view === "products" && <AdminProductOptions />}
+      {view === "promotions" && <AdminPromotionOptions />}
       {view === "orders" && <AdminOrderOptions />}
       {view === "users" && <AdminUserOptions />}
     </div>
