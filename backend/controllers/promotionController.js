@@ -5,7 +5,7 @@ import Promotion from "../models/promotionModel.js";
 //@route GET /api/promotions
 //@access Private/Admin
 const getPromotions = asyncHandler(async (req, res) => {
-  const promotions = await Promotion.find({});
+  const promotions = await Promotion.find({}).populate("user", "id name");
   res.json(promotions);
 });
 
@@ -27,7 +27,7 @@ const createPromotion = asyncHandler(async (req, res) => {
     startDate: date,
     endDate: date,
     active: false,
-    backgroundColor: cardinal,
+    backgroundColor: "cardinal",
   });
 
   const createdPromotion = await promotion.save();

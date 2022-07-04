@@ -11,14 +11,9 @@ import {
 export const promotionListReducer = (state = { promotions: [] }, action) => {
   switch (action.type) {
     case PROMOTION_LIST_REQUEST:
-      return { loading: true, promotions: [] };
+      return { loading: true };
     case PROMOTION_LIST_SUCCESS:
-      return {
-        loading: false,
-        promotions: action.payload.promotions,
-        pages: action.payload.pages,
-        page: action.payload.page,
-      };
+      return { loading: false, promotions: action.payload };
     case PROMOTION_LIST_FAIL:
       return { loading: false, error: action.payload };
     default:

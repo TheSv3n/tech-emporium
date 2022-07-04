@@ -26,6 +26,8 @@ export const listPromotions = () => async (dispatch, getState) => {
 
     const { data } = await axios.get(`/api/promotions`, config);
 
+    console.log(data);
+
     dispatch({
       type: PROMOTION_LIST_SUCCESS,
       payload: data,
