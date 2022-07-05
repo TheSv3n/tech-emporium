@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { PROMOTION_CREATE_RESET } from "../constants/promotionConstants";
-import { createPromotion, listPromotions } from "../actions/promotionActions";
+import {
+  createPromotion,
+  listPromotions,
+  deletePromotion,
+} from "../actions/promotionActions";
 
 const AdminPromotionOptions = () => {
   const params = useParams();
@@ -21,11 +25,22 @@ const AdminPromotionOptions = () => {
     promotion: createdPromotion,
   } = promotionCreate;
 
+  const promotionDelete = useSelector((state) => state.promotionDelete);
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = promotionDelete;
+
   const createPromotionHandler = () => {
     dispatch(createPromotion());
   };
 
-  const deleteHandler = (id) => {};
+  const deleteHandler = (id) => {
+    if (window.confirm("Are you sure?")) {
+      dispatch(deletePromotion(id));
+    }
+  };
 
   useEffect(() => {
     dispatch({ type: PROMOTION_CREATE_RESET });
@@ -35,17 +50,28 @@ const AdminPromotionOptions = () => {
     } else {
       dispatch(listPromotions("", pageNumber));
     }
-  }, [dispatch, successCreate, createdPromotion, pageNumber, navigate]);
+  }, [
+    dispatch,
+    successCreate,
+    createdPromotion,
+    pageNumber,
+    successDelete,
+    navigate,
+  ]);
 
   return (
     <div className="product-admin-container">
       <div className="new-product-button-row">
-        <button
-          className="button admin-button"
-          onClick={createPromotionHandler}
-        >
-          Create Promotion
-        </button>
+        {loadingCreate ? (
+          <div className="loader" />
+        ) : (
+          <button
+            className="button admin-button"
+            onClick={createPromotionHandler}
+          >
+            Create Promotion
+          </button>
+        )}
       </div>
       {loading ? (
         <div className="loader" />

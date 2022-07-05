@@ -35,6 +35,9 @@ import {
 import {
   promotionListReducer,
   promotionCreateReducer,
+  promotionUpdateReducer,
+  promotionDetailsReducer,
+  promotionDeleteReducer,
 } from "./reducers/promotionReducers";
 
 const reducer = combineReducers({
@@ -60,6 +63,9 @@ const reducer = combineReducers({
   userUpdate: userUpdateReducer,
   promotionList: promotionListReducer,
   promotionCreate: promotionCreateReducer,
+  promotionUpdate: promotionUpdateReducer,
+  promotionDetails: promotionDetailsReducer,
+  promotionDelete: promotionDeleteReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

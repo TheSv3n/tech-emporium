@@ -61,9 +61,16 @@ const AdminProductOptions = () => {
   return (
     <div className="product-admin-container">
       <div className="new-product-button-row">
-        <button className="button admin-button" onClick={createProductHandler}>
-          Create Product
-        </button>
+        {loadingCreate ? (
+          <div className="loader" />
+        ) : (
+          <button
+            className="button admin-button"
+            onClick={createProductHandler}
+          >
+            Create Product
+          </button>
+        )}
       </div>
       {loading ? (
         <div className="loader" />

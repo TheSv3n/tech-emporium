@@ -6,6 +6,16 @@ import {
   PROMOTION_CREATE_SUCCESS,
   PROMOTION_CREATE_FAIL,
   PROMOTION_CREATE_RESET,
+  PROMOTION_UPDATE_SUCCESS,
+  PROMOTION_UPDATE_FAIL,
+  PROMOTION_UPDATE_RESET,
+  PROMOTION_UPDATE_REQUEST,
+  PROMOTION_DETAILS_REQUEST,
+  PROMOTION_DETAILS_SUCCESS,
+  PROMOTION_DETAILS_FAIL,
+  PROMOTION_DELETE_REQUEST,
+  PROMOTION_DELETE_SUCCESS,
+  PROMOTION_DELETE_FAIL,
 } from "../constants/promotionConstants";
 
 export const promotionListReducer = (state = { promotions: [] }, action) => {
@@ -31,6 +41,47 @@ export const promotionCreateReducer = (state = {}, action) => {
       return { loading: false, error: action.payload };
     case PROMOTION_CREATE_RESET:
       return {};
+    default:
+      return state;
+  }
+};
+
+export const promotionUpdateReducer = (state = { promotion: {} }, action) => {
+  switch (action.type) {
+    case PROMOTION_UPDATE_REQUEST:
+      return { loading: true };
+    case PROMOTION_UPDATE_SUCCESS:
+      return { loading: false, success: true, promotion: action.payload };
+    case PROMOTION_UPDATE_FAIL:
+      return { loading: false, error: action.payload };
+    case PROMOTION_UPDATE_RESET:
+      return { promotion: {} };
+    default:
+      return state;
+  }
+};
+
+export const promotionDetailsReducer = (state = { promotion: {} }, action) => {
+  switch (action.type) {
+    case PROMOTION_DETAILS_REQUEST:
+      return { loading: true, ...state };
+    case PROMOTION_DETAILS_SUCCESS:
+      return { loading: false, promotion: action.payload };
+    case PROMOTION_DETAILS_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const promotionDeleteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case PROMOTION_DELETE_REQUEST:
+      return { loading: true };
+    case PROMOTION_DELETE_SUCCESS:
+      return { loading: false, success: true };
+    case PROMOTION_DELETE_FAIL:
+      return { loading: false, error: action.payload };
     default:
       return state;
   }
