@@ -31,6 +31,7 @@ function App() {
             <Route path="/search/:keyword" element={<HomeScreen />} />
             <Route path="/sort/:sortBy" element={<HomeScreen />} />
             <Route path="/admin/" element={<AdminScreen />} />
+            <Route path="/admin/:page/" element={<AdminScreen />} />
             <Route
               path="/admin/product/:id/edit"
               element={<ProductEditScreen />}

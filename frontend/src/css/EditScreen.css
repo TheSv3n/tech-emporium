@@ -23,7 +23,7 @@
     margin-top: 8px;
 }
 
-label {
+.image-label {
     cursor: pointer;
     background: var(--cardinal);
     color: var(--eggShell);
@@ -33,7 +33,7 @@ label {
     text-align: center;
 }
 
-label:hover {
+.image-label:hover {
     background: var(--cardinalShadow);
 }
 

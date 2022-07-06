@@ -5,7 +5,10 @@ import {
   listPromotionDetails,
   updatePromotion,
 } from "../actions/promotionActions";
-import { PROMOTION_UPDATE_RESET } from "../constants/promotionConstants";
+import {
+  PROMOTION_UPDATE_RESET,
+  PROMOTION_DETAILS_RESET,
+} from "../constants/promotionConstants";
 import axios from "axios";
 import "../css/EditScreen.css";
 
@@ -40,7 +43,8 @@ const PromotionEditScreen = () => {
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: PROMOTION_UPDATE_RESET });
-      navigate("/admin");
+      dispatch({ type: PROMOTION_DETAILS_RESET });
+      navigate("/admin/promotions");
     } else {
       if (!promotion.name || promotion._id !== promotionId) {
         dispatch(listPromotionDetails(promotionId));
@@ -49,8 +53,8 @@ const PromotionEditScreen = () => {
         setImage(promotion.image);
         setDiscount(promotion.discount);
         setDescription(promotion.description);
-        setStartDate(promotion.startDate);
-        setEndDate(promotion.endDate);
+        setStartDate(promotion.startDate.substring(0, 10));
+        setEndDate(promotion.endDate.substring(0, 10));
         setActive(promotion.active);
         setBackgroundColor(promotion.backgroundColor);
       }
@@ -86,7 +90,32 @@ const PromotionEditScreen = () => {
     setImage("");
   };
 
-  const submitHandler = (e) => {};
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    dispatch(
+      updatePromotion({
+        _id: promotionId,
+        name,
+        discount,
+        image,
+        description,
+        startDate,
+        endDate,
+        active,
+        backgroundColor,
+      })
+    );
+  };
+
+  const manageSetActive = (value) => {
+    if (value === "true") {
+      setActive(true);
+    }
+    if (value === "false") {
+      setActive(false);
+    }
+  };
 
   return (
     <div className="main-grid-container edit-page-grid-container main-border">
@@ -104,7 +133,7 @@ const PromotionEditScreen = () => {
         />
 
         <div className="image-form-row">
-          <label for="image-form">
+          <label htmlFor="image-form" className="image-label">
             <i className="fas fa-image" /> Add Image
           </label>
           <input
@@ -151,7 +180,7 @@ const PromotionEditScreen = () => {
 
         <div className="edit-form-label">Start Date</div>
         <input
-          type="text"
+          type="date"
           placeholder="Enter Start Date"
           name="start-date"
           className="edit-field"
@@ -162,7 +191,7 @@ const PromotionEditScreen = () => {
 
         <div className="edit-form-label">End Date</div>
         <input
-          type="text"
+          type="date"
           placeholder="Enter End Date"
           name="end-date"
           className="edit-field"
@@ -170,6 +199,26 @@ const PromotionEditScreen = () => {
           onChange={(e) => setEndDate(e.target.value)}
           required
         />
+
+        <div className="edit-form-label">Active</div>
+        <input
+          type="radio"
+          id="true"
+          name="active"
+          value="true"
+          checked={active === true}
+          onChange={(e) => manageSetActive(e.target.value)}
+        />
+        <label htmlFor="true">Yes</label>
+        <input
+          type="radio"
+          id="false"
+          name="active"
+          value="false"
+          checked={active === false}
+          onChange={(e) => manageSetActive(e.target.value)}
+        />
+        <label htmlFor="false">No</label>
 
         <button className="button edit-button" type="submit">
           <span>Submit</span>

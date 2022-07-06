@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import AdminOrderOptions from "../components/AdminOrderOptions";
 import AdminProductOptions from "../components/AdminProductOptions";
 import AdminUserOptions from "../components/AdminUserOptions";
@@ -9,6 +9,10 @@ import "../css/AdminScreen.css";
 
 const AdminScreen = () => {
   const navigate = useNavigate();
+  const params = useParams();
+
+  const page = params.page;
+
   const [view, setView] = useState("products");
 
   const userLogin = useSelector((state) => state.userLogin);
@@ -17,6 +21,9 @@ const AdminScreen = () => {
   useEffect(() => {
     if (!userInfo.isAdmin || !userInfo) {
       navigate(`/login`);
+    }
+    if (page) {
+      setView(page);
     }
   }, [userInfo, navigate]);
 

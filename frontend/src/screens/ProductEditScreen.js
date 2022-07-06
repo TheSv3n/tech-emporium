@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { listProductDetails, updateProduct } from "../actions/productActions";
-import { PRODUCT_UPDATE_RESET } from "../constants/productConstants";
+import {
+  PRODUCT_UPDATE_RESET,
+  PRODUCT_DETAILS_RESET,
+} from "../constants/productConstants";
 import axios from "axios";
 import "../css/EditScreen.css";
 
@@ -37,7 +40,8 @@ const ProductEditScreen = () => {
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: PRODUCT_UPDATE_RESET });
-      navigate("/admin");
+      dispatch({ type: PRODUCT_DETAILS_RESET });
+      navigate("/admin/products");
     } else {
       if (!product.name || product._id !== productId) {
         dispatch(listProductDetails(productId));
@@ -117,7 +121,7 @@ const ProductEditScreen = () => {
         />
 
         <div className="image-form-row">
-          <label for="image-form">
+          <label for="image-form" className="image-label">
             <i className="fas fa-image" /> Add Image
           </label>
           <input

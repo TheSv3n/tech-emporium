@@ -13,6 +13,7 @@ import {
   PROMOTION_DETAILS_REQUEST,
   PROMOTION_DETAILS_SUCCESS,
   PROMOTION_DETAILS_FAIL,
+  PROMOTION_DETAILS_RESET,
   PROMOTION_DELETE_REQUEST,
   PROMOTION_DELETE_SUCCESS,
   PROMOTION_DELETE_FAIL,
@@ -69,6 +70,8 @@ export const promotionDetailsReducer = (state = { promotion: {} }, action) => {
       return { loading: false, promotion: action.payload };
     case PROMOTION_DETAILS_FAIL:
       return { loading: false, error: action.payload };
+    case PROMOTION_DETAILS_RESET:
+      return { promotion: {} };
     default:
       return state;
   }
