@@ -8,6 +8,7 @@ import {
 } from "../constants/productConstants";
 import axios from "axios";
 import "../css/EditScreen.css";
+import SetPromotionModal from "../components/SetPromotionModal";
 
 const ProductEditScreen = () => {
   const params = useParams();
@@ -26,6 +27,7 @@ const ProductEditScreen = () => {
   const [description, setDescription] = useState("");
   const [uploading, setUploading] = useState(false);
   const [imageName, setImageName] = useState("No Image");
+  const [showSetPromotionModal, setShowSetPromotionModal] = useState(false);
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
@@ -105,115 +107,134 @@ const ProductEditScreen = () => {
     );
   };
 
+  const updateShowSetPromotionModal = (e) => {
+    e.preventDefault();
+    setShowSetPromotionModal(!showSetPromotionModal);
+  };
+
   return (
-    <div className="main-grid-container edit-page-grid-container main-border">
-      <div className="edit-page-title">Edit Product</div>
-      <form className="edit-form-container" onSubmit={submitHandler}>
-        <div className="edit-form-label">Name</div>
-        <input
-          type="text"
-          placeholder="Enter Name"
-          name="name"
-          className="edit-field"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
+    <>
+      <SetPromotionModal
+        showModal={showSetPromotionModal}
+        updateModal={updateShowSetPromotionModal}
+      />
 
-        <div className="image-form-row">
-          <label for="image-form" className="image-label">
-            <i className="fas fa-image" /> Add Image
-          </label>
+      <div className="main-grid-container edit-page-grid-container main-border">
+        <div className="edit-page-title">Edit Product</div>
+        <form className="edit-form-container">
+          <div className="edit-form-label">Name</div>
           <input
-            id="image-form"
-            type="file"
-            className="form-file"
-            onChange={uploadFileHandler}
+            type="text"
+            placeholder="Enter Name"
+            name="name"
+            className="edit-field"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
           />
-          {uploading ? (
-            <div className="loader" />
-          ) : (
-            <>
-              <div>{imageName}</div>
-              {image === "" ? (
-                ""
-              ) : (
-                <button onClick={clearImageHandler}>Clear</button>
-              )}
-            </>
-          )}
-        </div>
 
-        <div className="edit-form-label">Brand</div>
-        <input
-          type="text"
-          placeholder="Enter Brand"
-          name="brand"
-          className="edit-field"
-          value={brand}
-          onChange={(e) => setBrand(e.target.value)}
-          required
-        />
+          <div className="image-form-row">
+            <label for="image-form" className="image-label">
+              <i className="fas fa-image" /> Add Image
+            </label>
+            <input
+              id="image-form"
+              type="file"
+              className="form-file"
+              onChange={uploadFileHandler}
+            />
+            {uploading ? (
+              <div className="loader" />
+            ) : (
+              <>
+                <div>{imageName}</div>
+                {image === "" ? (
+                  ""
+                ) : (
+                  <button onClick={clearImageHandler}>Clear</button>
+                )}
+              </>
+            )}
+          </div>
 
-        <div className="edit-form-label">Category</div>
-        <input
-          type="text"
-          placeholder="Enter Category"
-          name="category"
-          className="edit-field"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          required
-        />
+          <div className="edit-form-label">Brand</div>
+          <input
+            type="text"
+            placeholder="Enter Brand"
+            name="brand"
+            className="edit-field"
+            value={brand}
+            onChange={(e) => setBrand(e.target.value)}
+            required
+          />
 
-        <div className="edit-form-label">Sub-Category</div>
-        <input
-          type="text"
-          placeholder="Enter Sub-Category"
-          name="sub-category"
-          className="edit-field"
-          value={subCategory}
-          onChange={(e) => setSubCategory(e.target.value)}
-          required
-        />
+          <div className="edit-form-label">Category</div>
+          <input
+            type="text"
+            placeholder="Enter Category"
+            name="category"
+            className="edit-field"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            required
+          />
 
-        <div className="edit-form-label">Description</div>
-        <input
-          type="text"
-          placeholder="Enter Description"
-          name="description"
-          className="edit-field"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-        />
+          <div className="edit-form-label">Sub-Category</div>
+          <input
+            type="text"
+            placeholder="Enter Sub-Category"
+            name="sub-category"
+            className="edit-field"
+            value={subCategory}
+            onChange={(e) => setSubCategory(e.target.value)}
+            required
+          />
 
-        <div className="edit-form-label">Price</div>
-        <input
-          type="number"
-          placeholder="Enter Price"
-          name="price"
-          className="edit-field"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-          required
-        />
+          <div className="edit-form-label">Description</div>
+          <input
+            type="text"
+            placeholder="Enter Description"
+            name="description"
+            className="edit-field"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          />
 
-        <div className="edit-form-label">Count in Stock</div>
-        <input
-          type="number"
-          placeholder="Enter Count in Stock"
-          name="count-in-stock"
-          className="edit-field"
-          value={countInStock}
-          onChange={(e) => setCountInStock(e.target.value)}
-          required
-        />
-        <button className="button edit-button" type="submit">
-          <span>Submit</span>
-        </button>
-      </form>
-    </div>
+          <div className="edit-form-label">Price</div>
+          <input
+            type="number"
+            placeholder="Enter Price"
+            name="price"
+            className="edit-field"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            required
+          />
+
+          <button
+            className="button promo-button"
+            onClick={updateShowSetPromotionModal}
+          >
+            <span>Change</span>
+          </button>
+
+          <div className="edit-form-label">Count in Stock</div>
+          <input
+            type="number"
+            placeholder="Enter Count in Stock"
+            name="count-in-stock"
+            className="edit-field"
+            value={countInStock}
+            onChange={(e) => setCountInStock(e.target.value)}
+            required
+          />
+          <button className="button edit-button" onClick={submitHandler}>
+            <span>Submit</span>
+          </button>
+        </form>
+      </div>
+    </>
   );
 };
 
