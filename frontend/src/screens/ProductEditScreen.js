@@ -212,6 +212,13 @@ const ProductEditScreen = () => {
             required
           />
 
+          <div className="edit-form-label">Promotion</div>
+          {product.promotion ? (
+            <span>{product.promotion.name}</span>
+          ) : (
+            <span>None </span>
+          )}
+
           <button
             className="button promo-button"
             onClick={updateShowSetPromotionModal}

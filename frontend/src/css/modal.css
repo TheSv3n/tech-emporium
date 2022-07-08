@@ -42,3 +42,19 @@
     text-align: center;
     grid-column: 1/3;
 }
+
+.set-promo-modal {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.promo-table {
+    grid-column: 1/4;
+}
+
+.set-promo-modal-title {
+    grid-column: 2/3;
+}
+
+.set-promo-modal-cancel-button {
+    grid-column: 2/3;
+}
