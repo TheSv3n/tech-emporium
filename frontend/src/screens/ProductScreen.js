@@ -45,6 +45,13 @@ const ProductScreen = () => {
   const { success: successProductReview, error: errorProductReview } =
     productReviewCreate;
 
+  const promotionDetails = useSelector((state) => state.promotionDetails);
+  const {
+    loading: loadingPromotion,
+    error: errorPromotion,
+    promotion,
+  } = promotionDetails;
+
   useEffect(() => {
     if (!product || product._id !== productId || successProductReview) {
       dispatch(listProductDetails(productId));

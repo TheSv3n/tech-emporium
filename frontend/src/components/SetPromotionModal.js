@@ -3,7 +3,14 @@ import "../css/modal.css";
 import { useDispatch, useSelector } from "react-redux";
 import { listPromotions } from "../actions/promotionActions";
 
-const SetPromotionModal = ({ showModal, updateModal }) => {
+const SetPromotionModal = ({
+  showModal,
+  updateModal,
+  setPromotionId,
+  setPromotionName,
+  setShowModal,
+  currentPromotionId,
+}) => {
   const dispatch = useDispatch();
   const promotionList = useSelector((state) => state.promotionList);
   const { loading, error, promotions, pages, page } = promotionList;
@@ -11,6 +18,19 @@ const SetPromotionModal = ({ showModal, updateModal }) => {
   useEffect(() => {
     dispatch(listPromotions());
   }, [dispatch]);
+
+  const handleClearPromotions = (e) => {
+    e.preventDefault();
+    setPromotionId("");
+    setPromotionName("");
+    setShowModal(false);
+  };
+
+  const handleSetPromotion = (promotionId, promotionName) => {
+    setPromotionId(promotionId);
+    setPromotionName(promotionName);
+    setShowModal(false);
+  };
 
   return (
     <div
@@ -35,16 +55,34 @@ const SetPromotionModal = ({ showModal, updateModal }) => {
                       <td>{promotion._id}</td>
                       <td>{promotion.name}</td>
                       <td>{promotion.discount}</td>
-
-                      <td>Set</td>
+                      {currentPromotionId === promotion._id ? (
+                        ""
+                      ) : (
+                        <td>
+                          <div
+                            className="details-link"
+                            onClick={() => {
+                              handleSetPromotion(promotion._id, promotion.name);
+                            }}
+                          >
+                            Set
+                          </div>
+                        </td>
+                      )}
                     </tr>
                   ) : (
-                    ""
+                    <tr key={promotion._id} />
                   )}
                 </>
               ))}
           </tbody>
         </table>
+        <button
+          className="button set-promo-modal-cancel-button"
+          onClick={handleClearPromotions}
+        >
+          Remove Promotion
+        </button>
         <button
           className="button set-promo-modal-cancel-button"
           onClick={updateModal}

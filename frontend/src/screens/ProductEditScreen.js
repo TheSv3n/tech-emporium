@@ -28,6 +28,8 @@ const ProductEditScreen = () => {
   const [uploading, setUploading] = useState(false);
   const [imageName, setImageName] = useState("No Image");
   const [showSetPromotionModal, setShowSetPromotionModal] = useState(false);
+  const [promotionId, setPromotionId] = useState("");
+  const [promotionName, setPromotionName] = useState("");
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
@@ -56,6 +58,8 @@ const ProductEditScreen = () => {
         setSubCategory(product.subCategory);
         setCountInStock(product.countInStock);
         setDescription(product.description);
+        setPromotionId(product.promotionId);
+        setPromotionName(product.promotionName);
       }
     }
   }, [dispatch, navigate, productId, product, successUpdate]);
@@ -103,6 +107,8 @@ const ProductEditScreen = () => {
         subCategory,
         description,
         countInStock,
+        promotionId,
+        promotionName,
       })
     );
   };
@@ -117,6 +123,10 @@ const ProductEditScreen = () => {
       <SetPromotionModal
         showModal={showSetPromotionModal}
         updateModal={updateShowSetPromotionModal}
+        setPromotionId={setPromotionId}
+        setPromotionName={setPromotionName}
+        setShowModal={setShowSetPromotionModal}
+        currentPromotionId={promotionId}
       />
 
       <div className="main-grid-container edit-page-grid-container main-border">
@@ -134,7 +144,7 @@ const ProductEditScreen = () => {
           />
 
           <div className="image-form-row">
-            <label for="image-form" className="image-label">
+            <label htmlFor="image-form" className="image-label">
               <i className="fas fa-image" /> Add Image
             </label>
             <input
@@ -216,15 +226,17 @@ const ProductEditScreen = () => {
           {product.promotion ? (
             <span>{product.promotion.name}</span>
           ) : (
-            <span>None </span>
+            <span>
+              {promotionId === "" || !promotionId ? "None" : promotionName}{" "}
+            </span>
           )}
 
-          <button
-            className="button promo-button"
+          <label
+            className="image-label promo-label"
             onClick={updateShowSetPromotionModal}
           >
             <span>Change</span>
-          </button>
+          </label>
 
           <div className="edit-form-label">Count in Stock</div>
           <input

@@ -96,3 +96,11 @@ body {
     grid-column: 1/7;
     text-align: left;
 }
+
+.details-link {
+    color: var(--davysGray);
+}
+
+.details-link:hover {
+    cursor: pointer;
+}

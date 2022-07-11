@@ -94,10 +94,14 @@ const productSchema = mongoose.Schema(
       required: false,
       default: 0,
     },
-    promotion: {
+    promotionId: {
       type: mongoose.Schema.Types.ObjectId,
       required: false,
       ref: "Promotion",
+    },
+    promotionName: {
+      type: String,
+      required: false,
     },
   },
   {
