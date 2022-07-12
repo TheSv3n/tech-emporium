@@ -12,6 +12,8 @@ import { addToBasket } from "../actions/basketActions";
 import RatingWidget from "../components/RatingWidget";
 import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
 import Alert from "../components/Alert";
+import { listPromotionDetails } from "../actions/promotionActions";
+import { PROMOTION_DETAILS_RESET } from "../constants/promotionConstants";
 
 const ProductScreen = () => {
   const params = useParams();
@@ -55,8 +57,12 @@ const ProductScreen = () => {
   useEffect(() => {
     if (!product || product._id !== productId || successProductReview) {
       dispatch(listProductDetails(productId));
+      dispatch({ type: PROMOTION_DETAILS_RESET });
     } else {
       setProductSpecs(product.specifications);
+      if (product.promotionId) {
+        dispatch(listPromotionDetails(product.promotionId));
+      }
     }
     if (successProductReview) {
       alert("Review Submitted");
@@ -100,6 +106,8 @@ const ProductScreen = () => {
               product={product}
               updateModal={updateShowAddToBasketModal}
               setQuantity={setQuantity}
+              loadingPromotion={loadingPromotion}
+              promotion={promotion}
             />
             <div className="specification-container">
               <div className="product-page-subtitle">Specifications</div>

@@ -62,7 +62,7 @@ export const promotionUpdateReducer = (state = { promotion: {} }, action) => {
   }
 };
 
-export const promotionDetailsReducer = (state = { promotion: {} }, action) => {
+export const promotionDetailsReducer = (state = {}, action) => {
   switch (action.type) {
     case PROMOTION_DETAILS_REQUEST:
       return { loading: true, ...state };
@@ -71,7 +71,7 @@ export const promotionDetailsReducer = (state = { promotion: {} }, action) => {
     case PROMOTION_DETAILS_FAIL:
       return { loading: false, error: action.payload };
     case PROMOTION_DETAILS_RESET:
-      return { promotion: {} };
+      return {};
     default:
       return state;
   }
