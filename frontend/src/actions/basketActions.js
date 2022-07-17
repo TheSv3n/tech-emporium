@@ -11,6 +11,18 @@ import {
 export const addToBasket = (id, qty) => async (dispatch, getState) => {
   const { data } = await axios.get(`/api/products/${id}`);
 
+  let promotionDiscount, promotionName, promotionPrice;
+
+  if (data.promotionId) {
+    const { data: promoData } = await axios.get(
+      `/api/promotions/${data.promotionId}`
+    );
+
+    promotionDiscount = promoData.discount;
+    promotionName = promoData.name;
+    promotionPrice = (data.price - data.price * promoData.discount).toFixed(2);
+  }
+
   dispatch({
     type: BASKET_ADD_ITEM,
     payload: {
@@ -19,6 +31,9 @@ export const addToBasket = (id, qty) => async (dispatch, getState) => {
       image: data.image,
       price: data.price,
       countInStock: data.countInStock,
+      promotionName: promotionName,
+      promotionDiscount: promotionDiscount,
+      promotionPrice: promotionPrice,
       qty,
     },
   });
