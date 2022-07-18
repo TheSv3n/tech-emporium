@@ -21,7 +21,22 @@ const BasketListItem = ({
       <Link to={`/product/${item.product}`} className="basket-list-item-title">
         <div>{item.name}</div>
       </Link>
-      <div className="basket-list-item-price">£{item.price.toFixed(2)}</div>
+      {!item.promotionName ? (
+        <div className="basket-list-item-price">£{item.price.toFixed(2)}</div>
+      ) : (
+        <div className="basket-list-item-price">
+          <span
+            style={{
+              textDecorationLine: "line-through",
+              color: "red",
+            }}
+          >
+            £{item.price.toFixed(2)}
+          </span>{" "}
+          <div className="basket-list-item-price">£{item.subTotal}</div>
+        </div>
+      )}
+
       <div className="basket-list-item-quantity">
         Qty:{" "}
         <select
@@ -44,7 +59,7 @@ const BasketListItem = ({
         </span>
       </div>
       <div className="basket-list-item-subtotal">
-        Subtotal: £{(item.price * item.qty).toFixed(2)}
+        Subtotal: £{(item.subTotal * item.qty).toFixed(2)}
       </div>
     </div>
   );

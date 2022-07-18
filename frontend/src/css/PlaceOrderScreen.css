@@ -42,6 +42,11 @@
 
 .order-list-item-price {
     grid-column: 9/13;
+    display: inline;    
+}
+
+.order-list-item-discount-info {
+    color: green;
 }
 
 ul {

@@ -32,8 +32,9 @@ export const addToBasket = (id, qty) => async (dispatch, getState) => {
       price: data.price,
       countInStock: data.countInStock,
       promotionName: promotionName,
+      promotionId: data.promotionId,
       promotionDiscount: promotionDiscount,
-      promotionPrice: promotionPrice,
+      subTotal: promotionPrice || data.price,
       qty,
     },
   });

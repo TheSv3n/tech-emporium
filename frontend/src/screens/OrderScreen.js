@@ -174,8 +174,24 @@ const OrderScreen = () => {
                     </Link>
                   </div>
                   <div className="order-list-item-price">
-                    {item.qty} x £{item.price.toFixed(2)} = £
-                    {(item.qty * item.price).toFixed(2)}
+                    <div>
+                      {item.qty} x £{item.subTotal} = £
+                      {(item.qty * item.subTotal).toFixed(2)}{" "}
+                    </div>
+                    <div className="order-list-item-price order-list-item-discount-info">
+                      {item.promotionDiscount ? (
+                        <>
+                          <div>{`Includes ${
+                            item.promotionDiscount * 100
+                          }% discount`}</div>{" "}
+                          <div>{`Original price £${(
+                            item.qty * item.price
+                          ).toFixed(2)}`}</div>
+                        </>
+                      ) : (
+                        ""
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}
@@ -186,7 +202,7 @@ const OrderScreen = () => {
             <div className="order-summary-column-row">
               <div>Items</div>£
               {order.orderItems
-                .reduce((acc, item) => acc + item.qty * item.price, 0)
+                .reduce((acc, item) => acc + item.qty * item.subTotal, 0)
                 .toFixed(2)}
             </div>
             <div className="order-summary-column-row">

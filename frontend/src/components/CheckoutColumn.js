@@ -26,7 +26,7 @@ const CheckoutColumn = ({
             </div>
             £
             {basketItems
-              .reduce((acc, item) => acc + item.qty * item.price, 0)
+              .reduce((acc, item) => acc + item.qty * item.subTotal, 0)
               .toFixed(2)}
           </div>
           <div>
@@ -44,7 +44,7 @@ const CheckoutColumn = ({
           </div>
           £
           {basketItems
-            .reduce((acc, item) => acc + item.qty * item.price, 0)
+            .reduce((acc, item) => acc + item.qty * item.subTotal, 0)
             .toFixed(2)}
         </div>
       )}

@@ -21,7 +21,7 @@ const PlaceOrderScreen = () => {
     return (Math.round(num * 100) / 100).toFixed(2);
   };
   basket.itemsPrice = addDecimals(
-    basket.basketItems.reduce((acc, item) => acc + item.price * item.qty, 0)
+    basket.basketItems.reduce((acc, item) => acc + item.subTotal * item.qty, 0)
   );
 
   basket.deliveryPrice = addDecimals(
