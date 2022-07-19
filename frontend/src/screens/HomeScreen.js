@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { listProducts } from "../actions/productActions";
+import { getActivePromotion } from "../actions/promotionActions";
 import ProductCard from "../components/ProductCard";
+import PromotionCard from "../components/PromotionCard";
 import "../css/HomeScreen.css";
 
 const HomeScreen = () => {
@@ -18,11 +20,19 @@ const HomeScreen = () => {
   const productList = useSelector((state) => state.productList);
   const { loading, error, products, page, pages } = productList;
 
+  const promotionActive = useSelector((state) => state.promotionActive);
+  const {
+    loading: loadingPromotion,
+    error: errorPromotion,
+    promotion,
+  } = promotionActive;
+
   useEffect(() => {
     if (sortBy) {
       setSort(sortBy);
     }
     dispatch(listProducts(keyword, pageNumber, sort));
+    dispatch(getActivePromotion());
   }, [dispatch, keyword, pageNumber, sort, sortBy]);
 
   const setView = (value) => {
@@ -51,7 +61,11 @@ const HomeScreen = () => {
   return (
     <>
       <div className="top-product-grid-container">
-        {!keyword && <div className="page-title">Promotions</div>}
+        {!keyword && promotion && (
+          <div className="page-title">
+            <PromotionCard promotion={promotion} />
+          </div>
+        )}
         <div className="page-title">
           {value} Products{" "}
           <span className="view-options">

@@ -10,7 +10,7 @@ const PurchaseColumn = ({
     <div className="purchase-column purchase-column-grid-container main-border">
       {loadingPromotion ? (
         <div className="loader" />
-      ) : promotion ? (
+      ) : promotion && promotion.active ? (
         <>
           <div className="product-price">
             Base Price: £{product.price && product.price.toFixed(2)}

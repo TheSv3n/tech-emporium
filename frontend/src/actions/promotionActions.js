@@ -14,6 +14,9 @@ import {
   PROMOTION_UPDATE_REQUEST,
   PROMOTION_UPDATE_SUCCESS,
   PROMOTION_UPDATE_FAIL,
+  PROMOTION_ACTIVE_REQUEST,
+  PROMOTION_ACTIVE_SUCCESS,
+  PROMOTION_ACTIVE_FAIL,
 } from "../constants/promotionConstants";
 import axios from "axios";
 
@@ -165,6 +168,29 @@ export const deletePromotion = (id) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: PROMOTION_DELETE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const getActivePromotion = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: PROMOTION_ACTIVE_REQUEST,
+    });
+
+    const { data } = await axios.get(`/api/promotions/active`);
+
+    dispatch({
+      type: PROMOTION_ACTIVE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: PROMOTION_ACTIVE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

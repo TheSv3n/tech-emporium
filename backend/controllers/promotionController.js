@@ -98,10 +98,19 @@ const deletePromotion = asyncHandler(async (req, res) => {
   }
 });
 
+//@desc Get active promotions
+//@route GET /api/promotions/active
+//@access Public
+const getActivePromotions = asyncHandler(async (req, res) => {
+  const promotion = await Promotion.findOne({ active: true });
+  res.json(promotion);
+});
+
 export {
   getPromotions,
   createPromotion,
   getPromotionById,
   deletePromotion,
   updatePromotion,
+  getActivePromotions,
 };

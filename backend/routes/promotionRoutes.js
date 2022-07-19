@@ -6,6 +6,7 @@ import {
   getPromotionById,
   getPromotions,
   updatePromotion,
+  getActivePromotions,
 } from "../controllers/promotionController.js";
 import { protect, admin } from "../middleware/authMiddleware.js";
 
@@ -13,6 +14,8 @@ router
   .route("/")
   .get(protect, admin, getPromotions)
   .post(protect, admin, createPromotion);
+
+router.route("/active").get(getActivePromotions);
 
 router
   .route("/:id")

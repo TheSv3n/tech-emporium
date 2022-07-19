@@ -52,3 +52,8 @@
 .view-options {
     font-size: 16px;
 }
+
+.promotion-card-container {
+    grid-column: 1/7;
+    background-color: var(--cardinal);
+}
