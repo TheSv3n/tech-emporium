@@ -61,11 +61,11 @@ const HomeScreen = () => {
   return (
     <>
       <div className="top-product-grid-container">
-        {/*!keyword && promotion && (
+        {!keyword && promotion && (
           <div className="page-title">
             <PromotionCard promotion={promotion} />
           </div>
-        )*/}
+        )}
         <div className="page-title">
           {value} Products{" "}
           <span className="view-options">
