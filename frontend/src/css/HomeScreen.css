@@ -55,5 +55,7 @@
 
 .promotion-card-container {
     grid-column: 1/7;
+    color: var(--eggShell);
     background-color: var(--cardinal);
+    text-align: center;
 }

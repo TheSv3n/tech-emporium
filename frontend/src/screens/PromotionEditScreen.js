@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   listPromotionDetails,
   updatePromotion,
+  getActivePromotion,
 } from "../actions/promotionActions";
 import {
   PROMOTION_UPDATE_RESET,
@@ -40,14 +41,22 @@ const PromotionEditScreen = () => {
     success: successUpdate,
   } = promotionUpdate;
 
+  const promotionActive = useSelector((state) => state.promotionActive);
+  const {
+    loading: loadingActivePromotion,
+    error: errorActivePromotion,
+    promotion: activePromotion,
+  } = promotionActive;
+
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: PROMOTION_UPDATE_RESET });
       dispatch({ type: PROMOTION_DETAILS_RESET });
       navigate("/admin/promotions");
     } else {
-      if (!promotion.name || promotion._id !== promotionId) {
+      if (!promotion || !promotion.name || promotion._id !== promotionId) {
         dispatch(listPromotionDetails(promotionId));
+        dispatch(getActivePromotion());
       } else {
         setName(promotion.name);
         setImage(promotion.image);
