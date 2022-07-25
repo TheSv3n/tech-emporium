@@ -30,6 +30,7 @@ const PromotionEditScreen = () => {
   const [backgroundColor, setBackgroundColor] = useState("");
   const [uploading, setUploading] = useState(false);
   const [imageName, setImageName] = useState("No Image");
+  const [otherPromoActive, setOtherPromoActive] = useState(false);
 
   const promotionDetails = useSelector((state) => state.promotionDetails);
   const { loading, error, promotion } = promotionDetails;
@@ -57,6 +58,9 @@ const PromotionEditScreen = () => {
       if (!promotion || !promotion.name || promotion._id !== promotionId) {
         dispatch(listPromotionDetails(promotionId));
         dispatch(getActivePromotion());
+        if (activePromotion && activePromotion._id === promotionId) {
+          setOtherPromoActive(true);
+        }
       } else {
         setName(promotion.name);
         setImage(promotion.image);
@@ -68,7 +72,14 @@ const PromotionEditScreen = () => {
         setBackgroundColor(promotion.backgroundColor);
       }
     }
-  }, [dispatch, navigate, promotionId, promotion, successUpdate]);
+  }, [
+    dispatch,
+    navigate,
+    promotionId,
+    promotion,
+    successUpdate,
+    activePromotion,
+  ]);
 
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
