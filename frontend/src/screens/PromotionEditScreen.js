@@ -12,6 +12,7 @@ import {
 } from "../constants/promotionConstants";
 import axios from "axios";
 import "../css/EditScreen.css";
+import Alert from "../components/Alert";
 
 const PromotionEditScreen = () => {
   const params = useParams();
@@ -58,9 +59,6 @@ const PromotionEditScreen = () => {
       if (!promotion || !promotion.name || promotion._id !== promotionId) {
         dispatch(listPromotionDetails(promotionId));
         dispatch(getActivePromotion());
-        if (activePromotion && activePromotion._id === promotionId) {
-          setOtherPromoActive(true);
-        }
       } else {
         setName(promotion.name);
         setImage(promotion.image);
@@ -71,6 +69,11 @@ const PromotionEditScreen = () => {
         setActive(promotion.active);
         setBackgroundColor(promotion.backgroundColor);
       }
+    }
+    if (activePromotion && activePromotion._id !== promotionId) {
+      setOtherPromoActive(true);
+    } else {
+      setOtherPromoActive(false);
     }
   }, [
     dispatch,
@@ -221,24 +224,38 @@ const PromotionEditScreen = () => {
         />
 
         <div className="edit-form-label">Active</div>
-        <input
-          type="radio"
-          id="true"
-          name="active"
-          value="true"
-          checked={active === true}
-          onChange={(e) => manageSetActive(e.target.value)}
-        />
-        <label htmlFor="true">Yes</label>
-        <input
-          type="radio"
-          id="false"
-          name="active"
-          value="false"
-          checked={active === false}
-          onChange={(e) => manageSetActive(e.target.value)}
-        />
-        <label htmlFor="false">No</label>
+        {loadingActivePromotion ? (
+          <div className="loader" />
+        ) : activePromotion && otherPromoActive ? (
+          <Alert variant="red">
+            Promotion{" "}
+            <Link to={`/admin/promotion/${activePromotion._id}/edit`}>
+              {activePromotion.name}
+            </Link>{" "}
+            already active. Please de-activate before activating this Promotion
+          </Alert>
+        ) : (
+          <>
+            <input
+              type="radio"
+              id="true"
+              name="active"
+              value="true"
+              checked={active === true}
+              onChange={(e) => manageSetActive(e.target.value)}
+            />
+            <label htmlFor="true">Yes</label>
+            <input
+              type="radio"
+              id="false"
+              name="active"
+              value="false"
+              checked={active === false}
+              onChange={(e) => manageSetActive(e.target.value)}
+            />
+            <label htmlFor="false">No</label>
+          </>
+        )}
 
         <button className="button edit-button" type="submit">
           <span>Submit</span>
