@@ -35,6 +35,10 @@ const getProducts = asyncHandler(async (req, res) => {
           $options: "i",
         },
       }
+    : req.query.promotionId
+    ? {
+        promotionId: req.query.promotionId,
+      }
     : {};
 
   const count = await Product.countDocuments({ ...keyword });

@@ -16,6 +16,7 @@ import AdminScreen from "./screens/AdminScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
 import UserEditScreen from "./screens/UserEditScreen";
 import PromotionEditScreen from "./screens/PromotionEditScreen";
+import PromotionScreen from "./screens/PromotionScreen";
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
             <Route path="/login/" element={<LoginScreen />} />
             <Route path="/register/" element={<RegisterScreen />} />
             <Route path="/basket/" element={<BasketScreen />} />
+            <Route path="/promotion/:id" element={<PromotionScreen />} />
             <Route path="/basket/:id" element={<BasketScreen />} />
             <Route path="/product/:id" element={<ProductScreen />} />
             <Route path="/" element={<HomeScreen />} />

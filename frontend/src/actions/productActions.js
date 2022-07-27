@@ -17,6 +17,9 @@ import {
   PRODUCT_DELETE_REQUEST,
   PRODUCT_DELETE_SUCCESS,
   PRODUCT_DELETE_FAIL,
+  PRODUCT_PROMOTED_LIST_REQUEST,
+  PRODUCT_PROMOTED_LIST_SUCCESS,
+  PRODUCT_PROMOTED_LIST_FAIL,
 } from "../constants/productConstants";
 import axios from "axios";
 
@@ -200,3 +203,27 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
     });
   }
 };
+
+export const listPromotedProducts =
+  (promotionId, pageNumber = "", sort) =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: PRODUCT_PROMOTED_LIST_REQUEST });
+
+      const { data } = await axios.get(
+        `/api/products?promotionId=${promotionId}&pageNumber=${pageNumber}&sortBy=${sort}`
+      );
+      dispatch({
+        type: PRODUCT_PROMOTED_LIST_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: PRODUCT_PROMOTED_LIST_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
