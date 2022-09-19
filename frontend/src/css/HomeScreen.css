@@ -59,3 +59,9 @@
     background-color: var(--cardinal);
     text-align: center;
 }
+
+.promotion-card-title-link {
+    text-decoration: none;
+    color: var(--eggShell);
+    
+}
