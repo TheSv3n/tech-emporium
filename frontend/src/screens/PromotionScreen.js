@@ -51,7 +51,7 @@ const PromotionScreen = () => {
           </select>
         </span>*/}
       </div>
-      {loading ? (
+      {loadingProducts ? (
         <div className="loader"></div>
       ) : (
         products &&
