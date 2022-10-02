@@ -65,3 +65,14 @@
     color: var(--eggShell);
     
 }
+
+.promotion-card-product-grid {
+    max-width: 1160px;
+    margin: 10px 300px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 10px;
+    row-gap: 10px;
+    text-align: center;
+}

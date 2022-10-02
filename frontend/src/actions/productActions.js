@@ -205,13 +205,15 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
 };
 
 export const listPromotedProducts =
-  (promotionId, pageNumber = "", sort) =>
+  (promotionId, pageNumber = "", sort, pageSize) =>
   async (dispatch) => {
     try {
       dispatch({ type: PRODUCT_PROMOTED_LIST_REQUEST });
 
       const { data } = await axios.get(
-        `/api/products?promotionId=${promotionId}&pageNumber=${pageNumber}&sortBy=${sort}`
+        `/api/products?promotionId=${promotionId}&pageNumber=${pageNumber}&sortBy=${sort}${
+          pageSize ? `&pageSize=${pageSize}` : ""
+        }`
       );
       dispatch({
         type: PRODUCT_PROMOTED_LIST_SUCCESS,
