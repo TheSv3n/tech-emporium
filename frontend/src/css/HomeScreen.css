@@ -14,6 +14,8 @@
     height: 392px;
     background-color: #fff;
     position: relative;
+    color: var(--eerieBlack);
+    font-size: 16px;
 }
 
 .product-card-image-container {
@@ -40,8 +42,7 @@
 
 .product-card-price {
     font-size: 20px;
-    line-height: 24px;
-    
+    line-height: 24px;    
 }
 
 .product-card-image {
@@ -75,4 +76,8 @@
     column-gap: 10px;
     row-gap: 10px;
     text-align: center;
+}
+
+.promotion-card-description {
+    font-size: 20px;
 }

@@ -30,6 +30,7 @@ const PromotionCard = ({ promotion }) => {
           {promotion.name}
         </Link>
       </div>
+      <div className="promotion-card-description">{promotion.description}</div>
       <div className="promotion-card-product-grid">
         {loadingProducts ? (
           <div className="loader"></div>
