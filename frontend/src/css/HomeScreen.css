@@ -75,7 +75,7 @@
 
 .promotion-card-product-grid {
     max-width: 1160px;
-    margin: 10px 150px;
+    margin: 10px 100px;
     padding: 10px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
