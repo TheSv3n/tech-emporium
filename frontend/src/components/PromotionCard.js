@@ -6,7 +6,7 @@ import ProductCard from "./ProductCard";
 
 const PromotionCard = ({ promotion }) => {
   const dispatch = useDispatch();
-  const pageSize = 3;
+  const pageSize = 5;
 
   const productPromotedList = useSelector((state) => state.productPromotedList);
   const {
@@ -18,19 +18,23 @@ const PromotionCard = ({ promotion }) => {
   } = productPromotedList;
 
   useEffect(() => {
-    dispatch(listPromotedProducts(promotion._id, 1, "Newest", pageSize));
+    dispatch(listPromotedProducts(promotion._id, 1, "ranked", pageSize));
   }, [dispatch, promotion, pageSize]);
   return (
     <div className="promotion-card-container main-border">
-      <div className="promotion-card-title">
-        <Link
-          className="promotion-card-title-link"
-          to={`/promotion/${promotion._id}`}
-        >
-          {promotion.name}
-        </Link>
+      <div className="promotion-card-title-band">
+        <div className="promotion-card-title">
+          <Link
+            className="promotion-card-title-link"
+            to={`/promotion/${promotion._id}`}
+          >
+            {promotion.name}
+          </Link>
+        </div>
+        <div className="promotion-card-description">
+          {promotion.description}
+        </div>
       </div>
-      <div className="promotion-card-description">{promotion.description}</div>
       <div className="promotion-card-product-grid">
         {loadingProducts ? (
           <div className="loader"></div>

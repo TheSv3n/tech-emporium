@@ -11,7 +11,7 @@
 
 .product-card-container {    
     padding: 24px 8px 16px;
-    height: 392px;
+    height: 350px;
     background-color: #fff;
     position: relative;
     color: var(--eerieBlack);
@@ -19,8 +19,7 @@
 }
 
 .product-card-image-container {
-    height: 131px;
-    
+    height: 131px;    
 }
 
 .product-card-title {
@@ -61,18 +60,25 @@
     text-align: center;
 }
 
+.promotion-card-title-band {
+    border-radius: 10px;
+    background-color: var(--honeyYellow);
+    color: var(--eerieBlack);
+    margin: 15px;
+}
+
 .promotion-card-title-link {
     text-decoration: none;
-    color: var(--eggShell);
+    color: var(--eerieBlack);
     
 }
 
 .promotion-card-product-grid {
     max-width: 1160px;
-    margin: 10px 300px;
+    margin: 10px 150px;
     padding: 10px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     column-gap: 10px;
     row-gap: 10px;
     text-align: center;
