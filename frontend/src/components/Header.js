@@ -46,27 +46,37 @@ const Header = () => {
         <div className="menu-text">
           <Link to="/basket" className="header-text">
             <span>
-              <i className="bi bi-basket2" /> Basket{" "}
-              {basketItems.length > 0 ? `(${basketItems.length} items)` : ""}
+              <i className="bi bi-basket2" />
+              <span className="header-link-text">
+                {" "}
+                Basket{" "}
+                {basketItems.length > 0 ? `(${basketItems.length} items)` : ""}
+              </span>
+              <span className="header-basket-short-text">
+                {basketItems.length > 0 ? `(${basketItems.length})` : ""}
+              </span>
             </span>
           </Link>
           {userInfo ? (
             <Link to="/profile" className="header-text">
               <span className="menu-item">
-                <i className="bi bi-person" /> Profile
+                <i className="bi bi-person" />
+                <span className="header-link-text"> Profile</span>
               </span>
             </Link>
           ) : (
             <Link to="/login" className="header-text">
               <span className="menu-item">
-                <i className="bi bi-box-arrow-in-right" /> Login
+                <i className="bi bi-box-arrow-in-right" />
+                <span className="header-link-text"> Login</span>
               </span>
             </Link>
           )}
           {userInfo && userInfo.isAdmin && (
             <Link to="/admin" className="header-text">
               <span className="menu-item">
-                <i className="bi bi bi-gear" /> Admin
+                <i className="bi bi bi-gear" />
+                <span className="header-link-text"> Admin</span>
               </span>
             </Link>
           )}

@@ -23,17 +23,15 @@ const PromotionCard = ({ promotion }) => {
   return (
     <div className="promotion-card-container main-border">
       <div className="promotion-card-title-band">
-        <div className="promotion-card-title">
-          <Link
-            className="promotion-card-title-link"
-            to={`/promotion/${promotion._id}`}
-          >
-            {promotion.name}
-          </Link>
-        </div>
-        <div className="promotion-card-description">
-          {promotion.description}
-        </div>
+        <Link
+          className="promotion-card-title-link"
+          to={`/promotion/${promotion._id}`}
+        >
+          <div className="promotion-card-title">{promotion.name}</div>
+          <div className="promotion-card-description">
+            {promotion.description}
+          </div>
+        </Link>
       </div>
       <div className="promotion-card-product-grid">
         {loadingProducts ? (

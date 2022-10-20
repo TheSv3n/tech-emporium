@@ -32,6 +32,14 @@ body {
     text-decoration: none;
 }
 
+.header-link-text {
+    display:none;        
+}
+
+.header-basket-short-text {
+    display: inline;
+}
+
 .title-text {
     text-align: left;
     padding: 8px;
@@ -41,6 +49,7 @@ body {
 
 .search-form {
     grid-column: 2/4;
+    display: none;
 }
 
 
@@ -102,4 +111,18 @@ body {
 
 .details-link:hover {
     cursor: pointer;
+}
+
+@media screen and (min-width: 992px) {
+    .search-form {
+        display: inline;
+    }
+
+    .header-link-text {
+        display:inline
+    }
+
+    .header-basket-short-text {
+        display: none;
+    }
 }
