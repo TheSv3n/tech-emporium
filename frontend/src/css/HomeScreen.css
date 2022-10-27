@@ -81,6 +81,10 @@
     text-align: center;
 }
 
+.promotion-card-title {
+    font-size: 24px;
+}
+
 .promotion-card-description {
     font-size: 20px;
 }
