@@ -1,5 +1,6 @@
-.product-page-grid-container {    
-    grid-template-columns: repeat(3, 1fr);    
+.product-page-grid-container {
+    display: grid;    
+    grid-template-columns: repeat(1, 1fr);    
 }
 
 .product-title {
@@ -53,4 +54,22 @@
     min-width: 90%;
     border-radius: 10px;
     margin-top: 8px;
+}
+
+@media screen and (min-width: 768px) {
+    .product-page-grid-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .product-page-grid-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (min-width: 1140px) {
+    .product-page-grid-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
