@@ -1,14 +1,9 @@
 .basket-page-grid-container {    
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(1, 1fr);
 }
 
 .basket-title {
     font-size: 24px;
-    grid-column: 1/4;    
-}
-
-.basket-items-container {    
-    grid-column: 1/4;
 }
 
 .basket-list-item-container {    
@@ -50,7 +45,24 @@
     padding: 8px;
     max-height: 131px;
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-column: 4/5;
-    grid-row: 2/3;    
+    grid-template-columns: repeat(1, 1fr);    
+}
+
+@media screen and (min-width: 992px) {
+    .basket-page-grid-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .basket-title {
+        grid-column: 1/4;
+    }
+
+    .basket-items-container {
+        grid-column: 1/4;
+    }
+
+    .checkout-column {
+        grid-column: 4/5;
+        grid-row: 2/3;
+    }
 }

@@ -1,19 +1,13 @@
 .place-order-page-grid-container {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(1, 1fr);
 }
 
 .place-order-page-title {
     font-size: 24px;
-    grid-column: 1/4;
-}
-
-.place-order-items-container {
-    grid-column: 1/4;
 }
 
 .place-order-page-subtitle {
     font-size: 20px;
-    grid-column: 1/4;
 }
 
 .place-order-column {
@@ -60,4 +54,22 @@ ul li {
     margin-top: -1px;
     padding: 12px;
     border-radius: 5px;
+}
+
+@media screen and (min-width: 992px) {
+    .place-order-page-grid-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .place-order-page-title {
+        grid-column: 1/4;
+    }
+
+    .place-order-items-container {
+        grid-column: 1/4;
+    }
+
+    .place-order-page-subtitle {
+        grid-column: 1/4;
+    }
 }
