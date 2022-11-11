@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { listPromotedProducts } from "../actions/productActions";
 import { listPromotionDetails } from "../actions/promotionActions";
 import ProductCard from "../components/ProductCard";
+import Meta from "../components/Meta";
 
 const PromotionScreen = () => {
   const params = useParams();
@@ -38,32 +39,35 @@ const PromotionScreen = () => {
   }, [dispatch, keyword, pageNumber, promotion, sort, sortBy, promotionId]);
 
   return (
-    <div className="top-product-grid-container">
-      <div className="page-title">
-        Products in {promotion && promotion.name}
-        {/*<span className="view-options">
-          - view by{" "}
-          <select onChange={(e) => setView(e.target.value)}>
-            <option>Latest</option>
-            <option>Top Rated</option>
-            <option>Price - Low-High</option>
-            <option>Price - High-Low</option>
-          </select>
-        </span>*/}
+    <>
+      <Meta title={promotion && promotion.name} />
+      <div className="top-product-grid-container">
+        <div className="page-title">
+          Products in {promotion && promotion.name}
+          {/*<span className="view-options">
+            - view by{" "}
+            <select onChange={(e) => setView(e.target.value)}>
+              <option>Latest</option>
+              <option>Top Rated</option>
+              <option>Price - Low-High</option>
+              <option>Price - High-Low</option>
+            </select>
+          </span>*/}
+        </div>
+        {loadingProducts ? (
+          <div className="loader"></div>
+        ) : (
+          products &&
+          products.map((product) => (
+            <ProductCard
+              key={product._id}
+              product={product}
+              promotion={promotion}
+            />
+          ))
+        )}
       </div>
-      {loadingProducts ? (
-        <div className="loader"></div>
-      ) : (
-        products &&
-        products.map((product) => (
-          <ProductCard
-            key={product._id}
-            product={product}
-            promotion={promotion}
-          />
-        ))
-      )}
-    </div>
+    </>
   );
 };
 

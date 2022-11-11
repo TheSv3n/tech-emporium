@@ -6,6 +6,7 @@ import { getActivePromotion } from "../actions/promotionActions";
 import ProductCard from "../components/ProductCard";
 import PromotionCard from "../components/PromotionCard";
 import "../css/HomeScreen.css";
+import Meta from "../components/Meta";
 
 const HomeScreen = () => {
   const params = useParams();
@@ -60,6 +61,7 @@ const HomeScreen = () => {
 
   return (
     <>
+      <Meta title="Home" />
       <div className="top-product-grid-container">
         {!keyword && promotion && <PromotionCard promotion={promotion} />}
         <div className="page-title">

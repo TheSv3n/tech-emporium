@@ -6,6 +6,7 @@ import AdminProductOptions from "../components/AdminProductOptions";
 import AdminUserOptions from "../components/AdminUserOptions";
 import AdminPromotionOptions from "../components/AdminPromotionOptions";
 import "../css/AdminScreen.css";
+import Meta from "../components/Meta";
 
 const AdminScreen = () => {
   const navigate = useNavigate();
@@ -28,47 +29,50 @@ const AdminScreen = () => {
   }, [userInfo, navigate]);
 
   return (
-    <div className="main-grid-container main-border admin-page-grid-container">
-      <div className="admin-page-title">Admin Options</div>
-      <div className="admin-page-button-row">
-        <button
-          className={`button admin-button ${
-            view === "products" && "inactive-button"
-          }`}
-          onClick={() => setView("products")}
-        >
-          Products
-        </button>
-        <button
-          className={`button admin-button ${
-            view === "promotions" && "inactive-button"
-          }`}
-          onClick={() => setView("promotions")}
-        >
-          Promotions
-        </button>
-        <button
-          className={`button admin-button ${
-            view === "orders" && "inactive-button"
-          }`}
-          onClick={() => setView("orders")}
-        >
-          Orders
-        </button>
-        <button
-          className={`button admin-button ${
-            view === "users" && "inactive-button"
-          }`}
-          onClick={() => setView("users")}
-        >
-          Users
-        </button>
+    <>
+      <Meta title="Admin Options" />
+      <div className="main-grid-container main-border admin-page-grid-container">
+        <div className="admin-page-title">Admin Options</div>
+        <div className="admin-page-button-row">
+          <button
+            className={`button admin-button ${
+              view === "products" && "inactive-button"
+            }`}
+            onClick={() => setView("products")}
+          >
+            Products
+          </button>
+          <button
+            className={`button admin-button ${
+              view === "promotions" && "inactive-button"
+            }`}
+            onClick={() => setView("promotions")}
+          >
+            Promotions
+          </button>
+          <button
+            className={`button admin-button ${
+              view === "orders" && "inactive-button"
+            }`}
+            onClick={() => setView("orders")}
+          >
+            Orders
+          </button>
+          <button
+            className={`button admin-button ${
+              view === "users" && "inactive-button"
+            }`}
+            onClick={() => setView("users")}
+          >
+            Users
+          </button>
+        </div>
+        {view === "products" && <AdminProductOptions />}
+        {view === "promotions" && <AdminPromotionOptions />}
+        {view === "orders" && <AdminOrderOptions />}
+        {view === "users" && <AdminUserOptions />}
       </div>
-      {view === "products" && <AdminProductOptions />}
-      {view === "promotions" && <AdminPromotionOptions />}
-      {view === "orders" && <AdminOrderOptions />}
-      {view === "users" && <AdminUserOptions />}
-    </div>
+    </>
   );
 };
 

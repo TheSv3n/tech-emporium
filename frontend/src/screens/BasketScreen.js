@@ -6,6 +6,7 @@ import "../css/BasketScreen.css";
 import BasketListItem from "../components/BasketListItem";
 import ConfirmRemoveItemModal from "../components/ConfirmRemoveItemModal";
 import CheckoutColumn from "../components/CheckoutColumn";
+import Meta from "../components/Meta";
 
 const BasketScreen = () => {
   const params = useParams();
@@ -52,6 +53,7 @@ const BasketScreen = () => {
 
   return (
     <>
+      <Meta title={`Basket (${basketItems.length} items)`} />
       <ConfirmRemoveItemModal
         showModal={showConfirmRemoveModal}
         updateModal={updateShowConfirmRemoveModal}

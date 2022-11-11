@@ -73,7 +73,7 @@ const Header = () => {
             </Link>
           )}
           {userInfo && userInfo.isAdmin && (
-            <Link to="/admin" className="header-text">
+            <Link to="/admin" className="header-text admin-link">
               <span className="menu-item">
                 <i className="bi bi bi-gear" />
                 <span className="header-link-text"> Admin</span>

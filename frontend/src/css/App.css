@@ -52,6 +52,9 @@ body {
     display: none;
 }
 
+.admin-link {
+    display: none;
+}
 
 .menu-text {
     text-align: right;
@@ -124,5 +127,9 @@ body {
 
     .header-basket-short-text {
         display: none;
+    }
+
+    .admin-link {
+        display: inline;
     }
 }

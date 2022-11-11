@@ -1,14 +1,9 @@
 .order-page-grid-container {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(1, 1fr);
 }
 
 .order-page-title {
     font-size: 24px;
-    grid-column: 1/4;
-}
-
-.order-items-container {
-    grid-column: 1/4;
 }
 
 .order-item-group-container {
@@ -17,14 +12,11 @@
 
 .order-page-subtitle {
     font-size: 20px;
-    grid-column: 1/4;
 }
 
 .order-summary-column {
     padding: 8px;    
-    grid-template-columns: repeat(1, 1fr);
-    grid-column: 4/5;
-    grid-row: 2/3;
+    grid-template-columns: repeat(1, 1fr);    
 }
 
 .order-summary-column-row {
@@ -32,4 +24,27 @@
     grid-template-columns: repeat(2, 1fr);
     border-bottom: 1px solid;
     margin-bottom: 8px;
+}
+
+@media screen and (min-width: 992px) {
+    .place-order-page-grid-container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .order-page-title {
+        grid-column: 1/4;
+    }
+
+    .order-items-container {
+        grid-column: 1/4;
+    }
+
+    .order-page-subtitle {
+        grid-column: 1/4;
+    }
+
+    .order-summary-column {
+        grid-column: 4/5;
+        grid-row: 2/3;
+    }
 }

@@ -14,6 +14,7 @@ import {
   ORDER_DELIVER_RESET,
 } from "../constants/orderConstants";
 import Alert from "../components/Alert";
+import Meta from "../components/Meta";
 
 const OrderScreen = () => {
   const dispatch = useDispatch();
@@ -107,6 +108,7 @@ const OrderScreen = () => {
 
   return (
     <>
+      <Meta title={`Order ${order && order._id}`} />
       {loading ? (
         <div className="loader"></div>
       ) : error ? (
@@ -114,6 +116,45 @@ const OrderScreen = () => {
       ) : (
         <div className="main-grid-container order-page-grid-container main-border">
           <div className="order-page-title">Order {orderId}</div>
+          <div className="order-summary-column main-border">
+            <div className="order-page-subtitle">Summary</div>
+            <div className="order-summary-column-row">
+              <div>Items</div>£
+              {order.orderItems
+                .reduce((acc, item) => acc + item.qty * item.subTotal, 0)
+                .toFixed(2)}
+            </div>
+            <div className="order-summary-column-row">
+              Delivery <div>£{order.deliveryPrice}</div>
+            </div>
+            <div className="order-summary-column-row">
+              Total <div>£{order.totalPrice.toFixed(2)}</div>
+            </div>
+            {!order.isPaid && (
+              <>
+                {loadingPay && <div className="loader" />}
+                {!sdkReady ? (
+                  <div className="loader" />
+                ) : (
+                  <PayPalButton
+                    amount={order.totalPrice}
+                    onSuccess={successPaymentHandler}
+                  />
+                )}
+              </>
+            )}
+            {userInfo &&
+              userInfo.isAdmin &&
+              order.isPaid &&
+              !order.isDelivered &&
+              (loadingDeliver ? (
+                <div className="loader" />
+              ) : (
+                <button className="button" onClick={deliverHandler}>
+                  Mark as Delivered
+                </button>
+              ))}
+          </div>
           <div className="order-items-container">
             <div className="order-item-group-container main-border">
               <div className="order-page-subtitle">Delivery</div>
@@ -196,45 +237,6 @@ const OrderScreen = () => {
                 </div>
               ))}
             </div>
-          </div>
-          <div className="order-summary-column main-border">
-            <div className="order-page-subtitle">Summary</div>
-            <div className="order-summary-column-row">
-              <div>Items</div>£
-              {order.orderItems
-                .reduce((acc, item) => acc + item.qty * item.subTotal, 0)
-                .toFixed(2)}
-            </div>
-            <div className="order-summary-column-row">
-              Delivery <div>£{order.deliveryPrice}</div>
-            </div>
-            <div className="order-summary-column-row">
-              Total <div>£{order.totalPrice.toFixed(2)}</div>
-            </div>
-            {!order.isPaid && (
-              <>
-                {loadingPay && <div className="loader" />}
-                {!sdkReady ? (
-                  <div className="loader" />
-                ) : (
-                  <PayPalButton
-                    amount={order.totalPrice}
-                    onSuccess={successPaymentHandler}
-                  />
-                )}
-              </>
-            )}
-            {userInfo &&
-              userInfo.isAdmin &&
-              order.isPaid &&
-              !order.isDelivered &&
-              (loadingDeliver ? (
-                <div className="loader" />
-              ) : (
-                <button className="button" onClick={deliverHandler}>
-                  Mark as Delivered
-                </button>
-              ))}
           </div>
         </div>
       )}

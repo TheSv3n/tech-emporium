@@ -14,6 +14,7 @@ import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants";
 import Alert from "../components/Alert";
 import { listPromotionDetails } from "../actions/promotionActions";
 import { PROMOTION_DETAILS_RESET } from "../constants/promotionConstants";
+import Meta from "../components/Meta";
 
 const ProductScreen = () => {
   const params = useParams();
@@ -79,6 +80,7 @@ const ProductScreen = () => {
 
   return (
     <>
+      <Meta title={product.name} />
       {loading ? (
         <div className="loader"></div>
       ) : error ? (

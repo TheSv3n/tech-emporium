@@ -9,6 +9,7 @@ import {
 import axios from "axios";
 import "../css/EditScreen.css";
 import SetPromotionModal from "../components/SetPromotionModal";
+import Meta from "../components/Meta";
 
 const ProductEditScreen = () => {
   const params = useParams();
@@ -120,6 +121,7 @@ const ProductEditScreen = () => {
 
   return (
     <>
+      <Meta title="Edit Product" />
       <SetPromotionModal
         showModal={showSetPromotionModal}
         updateModal={updateShowSetPromotionModal}

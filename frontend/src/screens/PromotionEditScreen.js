@@ -13,6 +13,7 @@ import {
 import axios from "axios";
 import "../css/EditScreen.css";
 import Alert from "../components/Alert";
+import Meta from "../components/Meta";
 
 const PromotionEditScreen = () => {
   const params = useParams();
@@ -141,127 +142,131 @@ const PromotionEditScreen = () => {
   };
 
   return (
-    <div className="main-grid-container edit-page-grid-container main-border">
-      <div className="edit-page-title">Edit Promotion</div>
-      <form className="edit-form-container" onSubmit={submitHandler}>
-        <div className="edit-form-label">Name</div>
-        <input
-          type="text"
-          placeholder="Enter Name"
-          name="name"
-          className="edit-field"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-
-        <div className="image-form-row">
-          <label htmlFor="image-form" className="image-label">
-            <i className="fas fa-image" /> Add Image
-          </label>
+    <>
+      <Meta title="Edit Promotion" />
+      <div className="main-grid-container edit-page-grid-container main-border">
+        <div className="edit-page-title">Edit Promotion</div>
+        <form className="edit-form-container" onSubmit={submitHandler}>
+          <div className="edit-form-label">Name</div>
           <input
-            id="image-form"
-            type="file"
-            className="form-file"
-            onChange={uploadFileHandler}
+            type="text"
+            placeholder="Enter Name"
+            name="name"
+            className="edit-field"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
           />
-          {uploading ? (
+
+          <div className="image-form-row">
+            <label htmlFor="image-form" className="image-label">
+              <i className="fas fa-image" /> Add Image
+            </label>
+            <input
+              id="image-form"
+              type="file"
+              className="form-file"
+              onChange={uploadFileHandler}
+            />
+            {uploading ? (
+              <div className="loader" />
+            ) : (
+              <>
+                <div>{imageName}</div>
+                {image === "" ? (
+                  ""
+                ) : (
+                  <button onClick={clearImageHandler}>Clear</button>
+                )}
+              </>
+            )}
+          </div>
+
+          <div className="edit-form-label">Description</div>
+          <input
+            type="text"
+            placeholder="Enter Description"
+            name="description"
+            className="edit-field"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          />
+
+          <div className="edit-form-label">Discount</div>
+          <input
+            type="number"
+            placeholder="Enter Discount"
+            name="discount"
+            className="edit-field"
+            value={discount}
+            onChange={(e) => setDiscount(e.target.value)}
+            required
+          />
+
+          <div className="edit-form-label">Start Date</div>
+          <input
+            type="date"
+            placeholder="Enter Start Date"
+            name="start-date"
+            className="edit-field"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+            required
+          />
+
+          <div className="edit-form-label">End Date</div>
+          <input
+            type="date"
+            placeholder="Enter End Date"
+            name="end-date"
+            className="edit-field"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+            required
+          />
+
+          <div className="edit-form-label">Active</div>
+          {loadingActivePromotion ? (
             <div className="loader" />
+          ) : activePromotion && otherPromoActive ? (
+            <Alert variant="red">
+              Promotion{" "}
+              <Link to={`/admin/promotion/${activePromotion._id}/edit`}>
+                {activePromotion.name}
+              </Link>{" "}
+              already active. Please de-activate before activating this
+              Promotion
+            </Alert>
           ) : (
             <>
-              <div>{imageName}</div>
-              {image === "" ? (
-                ""
-              ) : (
-                <button onClick={clearImageHandler}>Clear</button>
-              )}
+              <input
+                type="radio"
+                id="true"
+                name="active"
+                value="true"
+                checked={active === true}
+                onChange={(e) => manageSetActive(e.target.value)}
+              />
+              <label htmlFor="true">Yes</label>
+              <input
+                type="radio"
+                id="false"
+                name="active"
+                value="false"
+                checked={active === false}
+                onChange={(e) => manageSetActive(e.target.value)}
+              />
+              <label htmlFor="false">No</label>
             </>
           )}
-        </div>
 
-        <div className="edit-form-label">Description</div>
-        <input
-          type="text"
-          placeholder="Enter Description"
-          name="description"
-          className="edit-field"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-        />
-
-        <div className="edit-form-label">Discount</div>
-        <input
-          type="number"
-          placeholder="Enter Discount"
-          name="discount"
-          className="edit-field"
-          value={discount}
-          onChange={(e) => setDiscount(e.target.value)}
-          required
-        />
-
-        <div className="edit-form-label">Start Date</div>
-        <input
-          type="date"
-          placeholder="Enter Start Date"
-          name="start-date"
-          className="edit-field"
-          value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}
-          required
-        />
-
-        <div className="edit-form-label">End Date</div>
-        <input
-          type="date"
-          placeholder="Enter End Date"
-          name="end-date"
-          className="edit-field"
-          value={endDate}
-          onChange={(e) => setEndDate(e.target.value)}
-          required
-        />
-
-        <div className="edit-form-label">Active</div>
-        {loadingActivePromotion ? (
-          <div className="loader" />
-        ) : activePromotion && otherPromoActive ? (
-          <Alert variant="red">
-            Promotion{" "}
-            <Link to={`/admin/promotion/${activePromotion._id}/edit`}>
-              {activePromotion.name}
-            </Link>{" "}
-            already active. Please de-activate before activating this Promotion
-          </Alert>
-        ) : (
-          <>
-            <input
-              type="radio"
-              id="true"
-              name="active"
-              value="true"
-              checked={active === true}
-              onChange={(e) => manageSetActive(e.target.value)}
-            />
-            <label htmlFor="true">Yes</label>
-            <input
-              type="radio"
-              id="false"
-              name="active"
-              value="false"
-              checked={active === false}
-              onChange={(e) => manageSetActive(e.target.value)}
-            />
-            <label htmlFor="false">No</label>
-          </>
-        )}
-
-        <button className="button edit-button" type="submit">
-          <span>Submit</span>
-        </button>
-      </form>
-    </div>
+          <button className="button edit-button" type="submit">
+            <span>Submit</span>
+          </button>
+        </form>
+      </div>
+    </>
   );
 };
 

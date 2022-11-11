@@ -4,6 +4,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { getUserDetails, updateUser } from "../actions/userActions";
 import { USER_UPDATE_RESET } from "../constants/userConstants";
 import "../css/EditScreen.css";
+import Meta from "../components/Meta";
 
 const UserEditScreen = () => {
   const params = useParams();
@@ -47,44 +48,47 @@ const UserEditScreen = () => {
   };
 
   return (
-    <div className="main-grid-container edit-page-grid-container main-border">
-      <div className="edit-page-title">Edit User</div>
-      <form className="edit-form-container" onSubmit={submitHandler}>
-        <div className="edit-form-label">Name</div>
-        <input
-          type="text"
-          placeholder="Enter Name"
-          name="name"
-          className="edit-field"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
+    <>
+      <Meta title="Edit User" />
+      <div className="main-grid-container edit-page-grid-container main-border">
+        <div className="edit-page-title">Edit User</div>
+        <form className="edit-form-container" onSubmit={submitHandler}>
+          <div className="edit-form-label">Name</div>
+          <input
+            type="text"
+            placeholder="Enter Name"
+            name="name"
+            className="edit-field"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
 
-        <div className="edit-form-label">Email</div>
-        <input
-          type="text"
-          placeholder="Enter Email"
-          name="email"
-          className="edit-field"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+          <div className="edit-form-label">Email</div>
+          <input
+            type="text"
+            placeholder="Enter Email"
+            name="email"
+            className="edit-field"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
-        <div className="edit-form-label">Is Admin?</div>
-        <input
-          type="checkbox"
-          className="edit-field"
-          checked={isAdmin}
-          onChange={(e) => setIsAdmin(e.target.checked)}
-        />
+          <div className="edit-form-label">Is Admin?</div>
+          <input
+            type="checkbox"
+            className="edit-field"
+            checked={isAdmin}
+            onChange={(e) => setIsAdmin(e.target.checked)}
+          />
 
-        <button className="button edit-button" type="submit">
-          <span>Submit</span>
-        </button>
-      </form>
-    </div>
+          <button className="button edit-button" type="submit">
+            <span>Submit</span>
+          </button>
+        </form>
+      </div>
+    </>
   );
 };
 
