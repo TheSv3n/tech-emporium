@@ -135,9 +135,9 @@ const ProfileScreen = () => {
               <tr>
                 <th>ID</th>
                 <th>DATE</th>
-                <th>TOTAL</th>
-                <th>PAID</th>
-                <th>DELIVERED</th>
+                <th className="main-table-column">TOTAL</th>
+                <th className="main-table-column">PAID</th>
+                <th className="main-table-column">DELIVERED</th>
               </tr>
             </thead>
             <tbody>
@@ -146,15 +146,17 @@ const ProfileScreen = () => {
                   <tr key={order._id}>
                     <td>{order._id}</td>
                     <td>{order.createdAt.substring(0, 10)}</td>
-                    <td>£{order.totalPrice.toFixed(2)}</td>
-                    <td>
+                    <td className="main-table-column">
+                      £{order.totalPrice.toFixed(2)}
+                    </td>
+                    <td className="main-table-column">
                       {order.isPaid ? (
                         order.paidAt.substring(0, 10)
                       ) : (
                         <i className="bi bi-x" style={{ color: "red" }}></i>
                       )}
                     </td>
-                    <td>
+                    <td className="main-table-column">
                       {order.isDelivered ? (
                         order.deliveredAt.substring(0, 10)
                       ) : (
