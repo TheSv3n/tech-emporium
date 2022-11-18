@@ -25,13 +25,8 @@
     gap: 10px;    
 }
 
-.add-to-basket-modal {
-    grid-template-columns: repeat(3, 1fr);
-}
-
 .add-to-basket-modal-title {
-    text-align: center;
-    grid-column: 1/4;
+    text-align: center;    
 }
 
 .confirm-remove-item-modal {
@@ -57,4 +52,14 @@
 
 .set-promo-modal-cancel-button {
     grid-column: 2/3;
+}
+
+@media screen and (min-width: 992px) {
+    .add-to-basket-modal {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .add-to-basket-modal-title {
+        grid-column: 1/4;
+    }
 }
