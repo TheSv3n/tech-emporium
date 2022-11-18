@@ -197,7 +197,7 @@ const OrderScreen = () => {
               <div className="order-page-subtitle">Order Items</div>
               {order.orderItems.map((item, index) => (
                 <div key={index} className="order-list-item-grid-container">
-                  <div>
+                  <div className="order-list-item-image-container">
                     <img
                       className="order-list-item-image"
                       src={item.image}
